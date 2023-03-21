@@ -1,17 +1,19 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithoutArgument;
+import io.OutputHandler;
 
-public class ShowCommand implements CommandWithoutArgument {
+@NoArguments
+public class ShowCommand extends Command {
 
     /**
      * Action for <b>show</b> command.
      * Doesn't receive arguments
      */
-    public void execute() {
+    public void execute(String argument, OutputHandler outputHandler) {
         for (var group : CollectionManager.getAll()) {
-            System.out.println(group.toString());
+            outputHandler.println(group.toString());
         }
     }
 

@@ -2,9 +2,11 @@
 package executionmanager;
 
 
-import commands.CommandMapsBuilder;
-import interfaces.CommandWithArgument;
-import interfaces.CommandWithoutArgument;
+import commandmanagement.Command;
+import commandmanagement.CommandMapsBuilder;
+
+import exceptions.RecursionException;
+import io.OutputHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -13,12 +15,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class CommandProcessor {
-    final int COMMAND_NO_ARG_LENGTH = 1;
-    private final HashMap<String, CommandWithoutArgument> commandsWithoutArgumentHashMap = CommandMapsBuilder.buildCommandWithoutArgumentMap();
-    private final HashMap<String, CommandWithArgument> commandsWithArgumentHashMap = CommandMapsBuilder.buildCommandWithArgumentMap();
-
-    public CommandProcessor() {
-    }
+    final static int COMMAND_NO_ARG_LENGTH = 1;
+    final static int COMMAND_MAX_ARG_LENGTH = 2;
+    private static final HashMap<String, Command> commandsHashMap = CommandMapsBuilder.buildCommandMap();
 
     /**
      * Parses the command input string and executes the corresponding command. The method first trims the input string and
@@ -31,32 +30,32 @@ public class CommandProcessor {
      *
      * @param commandName a string representing the command input to parse
      */
-    public void parse(String commandName) {
-        commandName = commandName.trim();
-        String[] array = commandName.split("\\s+");
-        var node = array[0];
-        if (!isCommand(node)) {
-            System.out.println("Command doesn't exists");
-        } else if (isCommandWithoutArgument(node) && array.length != COMMAND_NO_ARG_LENGTH) {
-            System.out.println("This command doesn't contains argument");
-        } else if (isCommandWithoutArgument(node) && array.length == COMMAND_NO_ARG_LENGTH) {
-            CommandWithoutArgument command = commandsWithoutArgumentHashMap.get(commandName);
-            command.execute();
-        } else if (array.length != 2 || array[1] == null || array[1].equals("")) {
-            System.out.println("Wrong argument format");
-        } else {
-            String argument = array[1];
-            CommandWithArgument command = commandsWithArgumentHashMap.get(node);
-            command.execute(argument);
+    public static void parse(String commandName, OutputHandler outputHandler) {
+        try {
+            if (commandName == null) return;
+            String[] array = commandName.split("\\s+");
+            var node = array[0];
+            if (array.length > COMMAND_MAX_ARG_LENGTH) {
+                throw new IllegalArgumentException("Too much arguments for command");
+            }
+            if (!isCommand(node)) {
+                outputHandler.println("Command doesn't exists");
+            } else if (array.length == COMMAND_NO_ARG_LENGTH) {
+                Command command = commandsHashMap.get(node);
+                command.proxy(null, outputHandler);
+            } else {
+                String argument = array[1];
+                Command command = commandsHashMap.get(node);
+                command.proxy(argument, outputHandler);
+            }
+        } catch (IllegalArgumentException | RecursionException e) {
+            outputHandler.println(e.getMessage());
         }
+
     }
 
-    private boolean isCommandWithArgument(@NotNull String command) {
-        return commandsWithArgumentHashMap.containsKey(command);
-    }
-
-    private boolean isCommand(@NotNull String command) {
-        return isCommandWithoutArgument(command) || isCommandWithArgument(command);
+    private static boolean isCommand(@NotNull String command) {
+        return commandsHashMap.containsKey(command);
     }
 
     /**
@@ -72,13 +71,9 @@ public class CommandProcessor {
                 parse(String.valueOf(scanner.nextLine()));
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found exception");
+            outputHandler.println("File not found exception");
         } catch (StackOverflowError e) {
-            System.out.println("Recursion script error");
+            outputHandler.println("Recursion script error");
         }
-    }
-
-    private boolean isCommandWithoutArgument(String command) {
-        return commandsWithoutArgumentHashMap.containsKey(command);
     }
 }

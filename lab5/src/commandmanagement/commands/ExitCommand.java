@@ -1,15 +1,17 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
-import interfaces.CommandWithoutArgument;
+import commandmanagement.Command;
+import io.OutputHandler;
 
-public class ExitCommand implements CommandWithoutArgument {
+@NoArguments
+public class ExitCommand extends Command {
 
     /**
      * Action for <b>exit</b> command.
      * Doesn't receive arguments
      */
     @Override
-    public void execute() {
+    public void execute(String argument, OutputHandler outputHandler) {
         System.exit(0);
     }
 

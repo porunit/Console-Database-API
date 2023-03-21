@@ -1,9 +1,10 @@
-package commands.commandswithargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithArgument;
+import io.OutputHandler;
 
-public class RemoveByIdCommand implements CommandWithArgument {
+public class RemoveByIdCommand extends Command {
 
     /**
      * Action for <b>remove</b> command.
@@ -11,17 +12,16 @@ public class RemoveByIdCommand implements CommandWithArgument {
      *
      * @param argument command parameter
      */
-    public void execute(String argument) {
+    public void execute(String argument, OutputHandler outputHandler) {
         long id = 0;
         try {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
-            System.out.println("id must be number");
-        } finally {
-            if (CollectionManager.isStackEmpty()) System.out.println("Collection is empty");
-            else if (!CollectionManager.checkId(id)) System.out.println("id doesn't exists");
-            else CollectionManager.remove(id);
+            outputHandler.println("id must be number");
         }
+        if (CollectionManager.isStackEmpty()) outputHandler.println("Collection is empty");
+        else if (!CollectionManager.checkId(id)) outputHandler.println("id doesn't exists");
+        else CollectionManager.remove(id);
     }
 
     @Override

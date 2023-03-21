@@ -1,27 +1,27 @@
-package commands.commandswithargument;
+package commandmanagement.commands;
 
-import commands.commandswithoutargument.AddCommand;
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithArgument;
+import io.OutputHandler;
 
-public class UpdateCommand implements CommandWithArgument {
+public class UpdateCommand extends Command {
     /**
      * Action for <b>update</b> command.
-     * Receive arguments
+     * Receives arguments
      *
      * @param argument command parameter
      */
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, OutputHandler outputHandler) {
         long id = 0;
         try {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
-            System.out.println("id must be number");
+            outputHandler.println("id must be number");
             return;
         }
-        if (CollectionManager.isStackEmpty()) System.out.println("Collection is empty");
-        else if (!CollectionManager.checkId(id)) System.out.println("id doesn't exists");
+        if (CollectionManager.isStackEmpty()) outputHandler.println("Collection is empty");
+        else if (!CollectionManager.checkId(id)) outputHandler.println("id doesn't exist");
         else {
             var group = AddCommand.add();
             group.setId(id);

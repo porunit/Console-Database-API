@@ -1,17 +1,17 @@
-package commands.commandswithargument;
+package commandmanagement.commands;
 
-import commands.commandswithoutargument.AddCommand;
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithArgument;
+import io.OutputHandler;
 
-public class InsertAtCommand implements CommandWithArgument {
+public class InsertAtCommand extends Command {
     /**
      * Action for <b>insert_at</b> command.
      * Receive arguments
      *
      * @param argument command parameter
      */
-    public void execute(String argument) {
+    public void execute(String argument, OutputHandler outputHandler) {
         try {
             int index = Integer.parseInt(argument);
             if (index >= 0 && CollectionManager.isStackEmpty() ||

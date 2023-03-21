@@ -2,26 +2,18 @@
  * A utility class for managing user input from the console.
  * Provides methods for reading and parsing user input in various data types and enums.
  */
-package executionmanager;
+package io;
 
+
+import io.console.ConsoleInputHandler;
+import io.console.ConsoleOutputHandler;
 
 import java.util.Objects;
-import java.util.Scanner;
 
-public class InputManager {
-    private static final Scanner reader = new Scanner(System.in);
+public class AddInputHelper {
 
-    private static String input(String message) {
-        System.out.print(message);
-        return input();
-    }
-
-    private static String input() {
-        String string = reader.nextLine();
-        if (string == null || string.isBlank() || string.isEmpty())
-            return null;
-        return string.trim();
-    }
+    private static final ConsoleInputHandler reader = new ConsoleInputHandler();
+    private static final ConsoleOutputHandler outputHandler = new ConsoleOutputHandler();
 
     /**
      * Reads the user's input from the console as an enum of the specified type.
@@ -36,12 +28,13 @@ public class InputManager {
      */
     public static <T extends Enum<T>> T inputEnum(Class<T> enumName, String message, boolean isNullable) {
         while (true) {
-            var value = InputManager.input(message);
+            outputHandler.print(message);
+            var value = reader.input();
             try {
                 return Enum.valueOf(enumName, Objects.requireNonNull(value));
             } catch (IllegalArgumentException | NullPointerException e) {
                 if (isNullable && value == null) return null;
-                else System.out.println("Incorrect input");
+                else outputHandler.println("Incorrect input");
             }
         }
     }
@@ -58,8 +51,8 @@ public class InputManager {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable) {
         while (true) {
-            System.out.print(message);
-            var argument = InputManager.input();
+            outputHandler.print(message);
+            var argument = reader.input();
             try {
                 if (dataType == String.class) {
                     return (T) Objects.requireNonNull(argument);
@@ -72,12 +65,12 @@ public class InputManager {
                 } else if (dataType == Float.class) {
                     return dataType.cast(Float.parseFloat(Objects.requireNonNull(argument)));
                 } else {
-                    System.out.println("Unsupported number class");
+                    outputHandler.println("Unsupported number class");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect input format");
+                outputHandler.println("Incorrect input format");
             } catch (NullPointerException e) {
-                if (!isNullable) System.out.println("Incorrect input format");
+                if (!isNullable) outputHandler.println("Incorrect input format");
                 else return null;
             }
         }
@@ -97,8 +90,8 @@ public class InputManager {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable, int limit) {
         while (true) {
-            System.out.print(message);
-            var argument = InputManager.input();
+            outputHandler.print(message);
+            var argument = reader.input();
             try {
                 T parsedArgument = null;
                 if (dataType == String.class) {
@@ -118,9 +111,9 @@ public class InputManager {
                 }
                 return parsedArgument;
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect input format");
+                outputHandler.println("Incorrect input format");
             } catch (NullPointerException e) {
-                if (!isNullable) System.out.println("Incorrect input format");
+                if (!isNullable) outputHandler.println("Incorrect input format");
                 else return null;
             }
         }

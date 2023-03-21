@@ -1,13 +1,20 @@
 package executionmanager;
 
-import commands.commandswithoutargument.LoadCommand;
+import commandmanagement.commands.LoadCommand;
+import io.InputHandler;
+import io.OutputHandler;
+
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class CommandPrompt {
-    private final CommandProcessor parser = new CommandProcessor();
-    private final Scanner scanner = new Scanner(System.in);
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+
+    public CommandPrompt(InputHandler inputHandler, OutputHandler outputHandler) {
+        this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
+    }
 
     /**
      * This method starts the console-based user interface for interacting with the study group collection.
@@ -17,19 +24,19 @@ public class CommandPrompt {
      * If an error occurs while loading or reading user input, an error message is printed and the method exits.
      */
     public void start() {
+        String command;
         boolean isLoaded;
         try {
-            new LoadCommand().execute();
+            new LoadCommand().execute(null, outputHandler);
         } catch (NoSuchFieldError e) {
-            System.out.println("Error While loading");
+            outputHandler.println("Error While loading");
         } finally {
             isLoaded = !CollectionManager.isStackEmpty();
         }
-        String command;
         while (isLoaded) {
-            System.out.print("Enter command(type help to see command list): ");
+            outputHandler.print("Enter command(type help to see command list): ");
             try {
-                command = scanner.nextLine().trim();
+                command = inputHandler.input();
             } catch (NoSuchElementException e) {
                 break;
             }

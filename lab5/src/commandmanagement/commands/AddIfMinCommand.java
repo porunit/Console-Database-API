@@ -1,10 +1,10 @@
-package commands.commandswithargument;
+package commandmanagement.commands;
 
-import commands.commandswithoutargument.AddCommand;
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithArgument;
+import io.OutputHandler;
 
-public class AddIfMinCommand implements CommandWithArgument {
+public class AddIfMinCommand extends Command {
 
     /**
      * Action for <b>add_if_min</b> command.
@@ -13,7 +13,7 @@ public class AddIfMinCommand implements CommandWithArgument {
      * @param argument command parameter
      */
     @Override
-    public void execute(String argument) {
+    public void execute(String argument, OutputHandler outputHandler) {
         long id;
         try {
             id = Long.parseLong(argument);

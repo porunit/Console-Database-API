@@ -1,20 +1,22 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import data.StudyGroup;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithoutArgument;
+import io.OutputHandler;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SaveCommand implements CommandWithoutArgument {
+@NoArguments
+public class SaveCommand extends Command {
 
     /**
      * Action for <b>save</b> command.
      * Doesn't receive arguments
      */
-    public void execute() {
+    public void execute(String argument, OutputHandler outputHandler) {
         try (FileWriter writer = new FileWriter(CollectionManager.getFilePath());
              BufferedWriter bw = new BufferedWriter(writer)) {
             bw.write("---\n");
@@ -22,9 +24,9 @@ public class SaveCommand implements CommandWithoutArgument {
             for (StudyGroup group : groups) {
                 bw.write(group.toString() + "\n");
             }
-            System.out.println("Text written to the file successfully.");
+            outputHandler.println("Text written to the file successfully.");
         } catch (IOException e) {
-            System.out.println("IOException catch, it may be due to lack of file permissions");
+            outputHandler.println("IOException catch, it may be due to lack of file permissions");
         }
     }
 

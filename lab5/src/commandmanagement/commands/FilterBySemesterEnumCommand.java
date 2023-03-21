@@ -1,29 +1,30 @@
-package commands.commandswithargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import data.Semester;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithArgument;
+import io.OutputHandler;
 
 import java.util.NoSuchElementException;
 
-public class FilterBySemesterEnumCommand implements CommandWithArgument {
+public class FilterBySemesterEnumCommand extends Command {
     /**
      * Action for <b>filter_by_semester</b> command.
      * Receive arguments
      *
      * @param argument command parameter
      */
-    public void execute(String argument) {
+    public void execute(String argument, OutputHandler outputHandler) {
         Semester semester = null;
         try {
             semester = Semester.valueOf(argument);
         } catch (NoSuchElementException | IllegalArgumentException e) {
-            System.out.println("No such semester");
+            outputHandler.println("No such semester");
         }
         var groups = CollectionManager.getFilteredBySemesterEnum(semester);
         if (!groups.isEmpty()) {
             for (var it : groups) {
-                System.out.println(it);
+                outputHandler.println(it.toString());
             }
         }
     }

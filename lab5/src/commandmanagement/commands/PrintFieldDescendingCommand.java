@@ -1,19 +1,21 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import data.comparators.FormOfEducationComparator;
 import data.FormOfEducation;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithoutArgument;
+import io.OutputHandler;
 
 import java.util.ArrayList;
 
-public class PrintFieldDescendingFormOfEducationCommand implements CommandWithoutArgument {
+@NoArguments
+public class PrintFieldDescendingCommand extends Command {
 
     /**
      * Action for <b>print_field_descending_form_of_education</b> command.
      * Doesn't receive arguments
      */
-    public void execute() {
+    public void execute(String argument, OutputHandler outputHandler) {
         var groups = CollectionManager.getAll();
         ArrayList<FormOfEducation> formOfEducations = new ArrayList<>();
         for (var it : groups) {
@@ -23,7 +25,7 @@ public class PrintFieldDescendingFormOfEducationCommand implements CommandWithou
         for (var it : formOfEducations) {
             System.out.print(it + " | ");
         }
-        System.out.println();
+        outputHandler.println();
     }
 
     @Override

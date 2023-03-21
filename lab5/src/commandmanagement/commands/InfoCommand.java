@@ -1,18 +1,18 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithoutArgument;
+import io.OutputHandler;
 
-import java.time.format.DateTimeFormatter;
-
-public class InfoCommand implements CommandWithoutArgument {
+@NoArguments
+public class InfoCommand extends Command {
 
     /**
      * Action for <b>info</b> command.
      * Doesn't receive arguments
      */
-    public void execute() {
-        System.out.println("type: " + CollectionManager.getCollectionType() + "\n" +
+    public void execute(String argument, OutputHandler outputHandler) {
+        outputHandler.println("type: " + CollectionManager.getCollectionType() + "\n" +
                 "creation date: " + CollectionManager.getCreationDate() + "\n" +
                 "size: " + CollectionManager.getAmountElements() +
                 "\n");

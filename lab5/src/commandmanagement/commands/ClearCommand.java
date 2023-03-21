@@ -1,16 +1,18 @@
-package commands.commandswithoutargument;
+package commandmanagement.commands;
 
+import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import interfaces.CommandWithoutArgument;
+import io.OutputHandler;
 
-public class ClearCommand implements CommandWithoutArgument {
+@NoArguments
+public class ClearCommand extends Command {
 
     /**
      * Action for <b>clear</b> command.
      * Doesn't receive arguments
      */
     @Override
-    public void execute() {
+    public void execute(String argument, OutputHandler outputHandler) {
         CollectionManager.clear();
     }
 
