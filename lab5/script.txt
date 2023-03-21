@@ -1,2 +1,2 @@
-info
-help
+execute_script script3.txt
+execute_script script.txt

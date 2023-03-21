@@ -1,6 +1,4 @@
-
 package executionmanager;
-
 
 import commandmanagement.Command;
 import commandmanagement.CommandMapsBuilder;
@@ -64,11 +62,11 @@ public class CommandProcessor {
      *
      * @param path file name or location
      */
-    public void executionScript(String path) {
+    public static void executeScript(String path, OutputHandler outputHandler) {
         try {
             Scanner scanner = new Scanner(new File(path));
             while (scanner.hasNextLine()) {
-                parse(String.valueOf(scanner.nextLine()));
+                parse(String.valueOf(scanner.nextLine()), outputHandler);
             }
         } catch (FileNotFoundException e) {
             outputHandler.println("File not found exception");

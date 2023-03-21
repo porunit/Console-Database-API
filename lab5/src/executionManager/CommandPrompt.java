@@ -40,7 +40,7 @@ public class CommandPrompt {
             } catch (NoSuchElementException e) {
                 break;
             }
-            parser.parse(command);
+            CommandProcessor.parse(command, outputHandler);
         }
     }
 }
