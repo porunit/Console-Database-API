@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 @NoArguments
 public class ShowCommand extends Command {
@@ -13,14 +13,14 @@ public class ShowCommand extends Command {
      */
     public void execute(String argument, OutputHandler outputHandler) {
         if(CollectionManager.isStackEmpty()){
-            outputHandler.println("Collection is empty");
+            outputHandler.print("Collection is empty");
             return;
         }
         StringBuilder builder = new StringBuilder();
         for (var group : CollectionManager.getAll()) {
             builder.append(group.toString()).append("\n");
         }
-        outputHandler.println(builder.toString());
+        outputHandler.print(builder.toString());
     }
 
     @Override

@@ -2,19 +2,49 @@
  * A utility class for managing user input from the console.
  * Provides methods for reading and parsing user input in various Server.data types and enums.
  */
-package Client;
+package Client.io;
 
-import io.InputHandler;
-import io.OutputHandler;
-import ioserver.ServerInputHandler;
-import ioserver.ServerOutputHandler;
+import data.*;
 
 import java.util.Objects;
 
 public class AddInputHelper {
 
-    private static InputHandler reader;
-    private static OutputHandler outputHandler;
+    private static InputHandler reader = new ConsoleInputHandler();
+    private static final int COORD_MIN_X = -156;
+    private static final int PERSON_MIN_WEIGHT = 0;
+
+
+    public static String add() {
+        StringBuilder stringBuilder = new StringBuilder();
+        String name = inputString(String.class, "Name(String):", false);
+        Float x = inputString(Float.class, "Coordinates\nx(Float): ", false, COORD_MIN_X);
+        Long y = inputString(Long.class, "y(Long): ", false);
+        Integer studentCount = inputString(Integer.class, "Students count(Integer): ", true, 0);
+        FormOfEducation formOfEducation = inputEnum(FormOfEducation.class, "Form of education(DISTANCE_EDUCATION,FULL_TIME_EDUCATION, EVENING_CLASSES): ", true);
+        Semester semester = inputEnum(Semester.class, "Semester(SECOND,THIRD,SIXTH): ", false);
+        String nameAdmin = inputString(String.class, "Group admin\nName(String): ", false);
+        Long weightAdmin = inputString(Long.class, "Weight(Long): ", false, PERSON_MIN_WEIGHT);
+        Color eyeColorAdmin = AddInputHelper.inputEnum(Color.class, "Eye color(RED,YELLOW,BLACK): ", true);
+        float xAdmin = inputString(Float.class, "Location\nx(float): ", false);
+        Integer yAdmin = inputString(Integer.class, "y(Integer): ", false);
+        int zAdmin = inputString(Integer.class, "z(int): ", false);
+
+        stringBuilder.append(name).append("\n");
+        stringBuilder.append(x).append("\n");
+        stringBuilder.append(y).append("\n");
+        stringBuilder.append(studentCount).append("\n");
+        stringBuilder.append(formOfEducation).append("\n");
+        stringBuilder.append(semester).append("\n");
+        stringBuilder.append(nameAdmin).append("\n");
+        stringBuilder.append(weightAdmin).append("\n");
+        stringBuilder.append(eyeColorAdmin).append("\n");
+        stringBuilder.append(xAdmin).append("\n");
+        stringBuilder.append(yAdmin).append("\n");
+        stringBuilder.append(zAdmin).append("\n");
+        
+        return stringBuilder.toString();
+    }
 
     /**
      * Reads the user's input from the console as an enum of the specified type.
@@ -29,13 +59,13 @@ public class AddInputHelper {
      */
     public static <T extends Enum<T>> T inputEnum(Class<T> enumName, String message, boolean isNullable) {
         while (true) {
-            outputHandler.print(message);
+            System.out.println(message);
             var value = reader.input();
             try {
                 return Enum.valueOf(enumName, Objects.requireNonNull(value));
             } catch (IllegalArgumentException | NullPointerException e) {
                 if (isNullable && value == null) return null;
-                else outputHandler.println("Incorrect input");
+                else System.out.println("Incorrect input");
             }
         }
     }
@@ -52,7 +82,7 @@ public class AddInputHelper {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable) {
         while (true) {
-            outputHandler.print(message);
+            System.out.println(message);
             var argument = reader.input();
             try {
                 if (dataType == String.class) {
@@ -66,12 +96,12 @@ public class AddInputHelper {
                 } else if (dataType == Float.class) {
                     return dataType.cast(Float.parseFloat(Objects.requireNonNull(argument)));
                 } else {
-                    outputHandler.println("Unsupported number class");
+                    System.out.println("Unsupported number class");
                 }
             } catch (NumberFormatException e) {
-                outputHandler.println("Incorrect input format");
+                System.out.println("Incorrect input format");
             } catch (NullPointerException e) {
-                if (!isNullable) outputHandler.println("Incorrect input format");
+                if (!isNullable) System.out.println("Incorrect input format");
                 else return null;
             }
         }
@@ -91,7 +121,7 @@ public class AddInputHelper {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable, int limit) {
         while (true) {
-            outputHandler.print(message);
+            System.out.println(message);
             var argument = reader.input();
             try {
                 T parsedArgument = null;
@@ -112,15 +142,11 @@ public class AddInputHelper {
                 }
                 return parsedArgument;
             } catch (NumberFormatException e) {
-                outputHandler.println("Incorrect input format");
+                System.out.println("Incorrect input format");
             } catch (NullPointerException e) {
-                if (!isNullable) outputHandler.println("Incorrect input format");
+                if (!isNullable) System.out.println("Incorrect input format");
                 else return null;
             }
         }
-    }
-    public static void setHandler(ServerInputHandler input, ServerOutputHandler output){
-        reader = input;
-        outputHandler = output;
     }
 }

@@ -3,8 +3,7 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import exceptions.RecursionException;
 import executionmanager.CommandProcessor;
-import io.OutputHandler;
-import org.jetbrains.annotations.Nullable;
+import Client.io.OutputHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,7 +34,6 @@ public class ExecuteScriptCommand extends Command {
         return "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
     }
 
-    @Nullable
     public static String checkRecursion(String path, Set<String> used) {
         StringBuilder script = new StringBuilder();
         try (Scanner scanner = new Scanner(new File(path))) {

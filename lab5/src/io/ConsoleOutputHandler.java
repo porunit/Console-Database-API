@@ -1,9 +1,9 @@
-package Client;
+package io;
 
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 public class ConsoleOutputHandler implements OutputHandler {
-    @Override
+
     public void println(String line) {
             System.out.println(line);
     }

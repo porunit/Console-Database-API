@@ -1,8 +1,8 @@
 package executionmanager;
 
 import commandmanagement.commands.LoadCommand;
-import io.InputHandler;
-import io.OutputHandler;
+import Client.io.InputHandler;
+import Client.io.OutputHandler;
 
 import java.util.NoSuchElementException;
 
@@ -28,7 +28,7 @@ public class CommandPrompt {
         try {
             new LoadCommand().execute(null, outputHandler);
         } catch (NoSuchFieldError e) {
-            outputHandler.println("Error While loading");
+            outputHandler.print("Error While loading");
         }
         while (true) {
             outputHandler.print("Enter command(type help to see command list): ");

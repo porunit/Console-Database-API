@@ -1,6 +1,4 @@
-package Client;
-
-import io.InputHandler;
+package Client.io;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -21,11 +19,6 @@ public class ConsoleInputHandler implements InputHandler {
                 return null;
             return string.trim();
         }
-    }
-
-    @Override
-    public boolean hasNext() {
-        return reader.hasNext();
     }
 
     @Override

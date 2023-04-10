@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 @NoArguments
 public class ClearCommand extends Command {

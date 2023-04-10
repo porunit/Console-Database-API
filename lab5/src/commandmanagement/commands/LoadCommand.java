@@ -8,7 +8,7 @@ import commandmanagement.Command;
 import data.StudyGroup;
 import exceptions.WrongDataTypeException;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,17 +28,17 @@ public class LoadCommand extends Command {
         try {
             groupStack = mapper.readValue(new File(path), new TypeReference<Stack<StudyGroup>>() {
             });
-            outputHandler.println("File was loaded");
+            outputHandler.print("File was loaded");
         } catch (DatabindException e) {
-            outputHandler.println("'" + path + "' contains broken data");
+            outputHandler.print("'" + path + "' contains broken data");
         } catch (IOException e) {
-            outputHandler.println("Unable to load '" + path + "' No such file\n");
+            outputHandler.print("Unable to load '" + path + "' No such file\n");
         }
         CollectionManager.load(groupStack);
         try {
             CollectionManager.joinId();
         } catch (WrongDataTypeException e) {
-            outputHandler.println("ID's must be different");
+            outputHandler.print("ID's must be different");
         }
         CollectionManager.sort();
     }

@@ -1,22 +1,20 @@
 package ioserver;
 
-import io.InputHandler;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 
-public class ServerInputHandler implements InputHandler {
-    private final DatagramSocket socket;
-    private int lastPort;
+public class ServerInputHandler {
+    private static DatagramSocket socket;
+    private static int lastPort;
 
-    public ServerInputHandler(DatagramSocket socket){
-        this.socket = socket;
+
+
+    public static void setSocket(DatagramSocket ServerSocket){
+        socket = ServerSocket;
     }
-
-    @Override
-    public String input() {
+    public static String input() {
         byte[] receiveData = new byte[1024];
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         try {
@@ -29,16 +27,10 @@ public class ServerInputHandler implements InputHandler {
         return command.trim();
     }
 
-    public int getLastPort(){
+    public static int getLastPort(){
         return lastPort;
     }
 
-    @Override
-    public boolean hasNext() {
-        return true;
-    }
-
-    @Override
     public void close() {
         socket.close();
     }

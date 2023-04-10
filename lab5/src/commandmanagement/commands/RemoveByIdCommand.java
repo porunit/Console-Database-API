@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 public class RemoveByIdCommand extends Command {
 
@@ -17,10 +17,10 @@ public class RemoveByIdCommand extends Command {
         try {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
-            outputHandler.println("id must be number");
+            outputHandler.print("id must be number");
         }
-        if (CollectionManager.isStackEmpty()) outputHandler.println("Collection is empty");
-        else if (!CollectionManager.checkId(id)) outputHandler.println("id doesn't exists");
+        if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
+        else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exists");
         else CollectionManager.remove(id);
     }
 

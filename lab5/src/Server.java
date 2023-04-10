@@ -1,4 +1,3 @@
-import Client.AddInputHelper;
 import executionmanager.CommandProcessor;
 import ioserver.ServerInputHandler;
 import ioserver.ServerOutputHandler;
@@ -10,12 +9,11 @@ import java.net.InetAddress;
 public class Server {
     public static void main(String[] args) throws Exception {
         DatagramSocket serverSocket = new DatagramSocket(123);
-        ServerInputHandler inputHandler = new ServerInputHandler(serverSocket);
+        ServerInputHandler.setSocket(serverSocket);
         ServerOutputHandler outputHandler = new ServerOutputHandler(serverSocket, InetAddress.getByName("localhost"));
-        AddInputHelper.setHandler(inputHandler,outputHandler);
         while (true) {
-            var command = inputHandler.input();
-            outputHandler.setPort(inputHandler.getLastPort());
+            var command = ServerInputHandler.input();
+            outputHandler.setPort(ServerInputHandler.getLastPort());
             System.out.println(command);
             CommandProcessor.parse(command, outputHandler);
         }

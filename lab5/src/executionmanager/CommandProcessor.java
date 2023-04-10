@@ -4,8 +4,7 @@ import commandmanagement.Command;
 import commandmanagement.CommandMapsBuilder;
 
 import exceptions.RecursionException;
-import io.OutputHandler;
-import org.jetbrains.annotations.NotNull;
+import Client.io.OutputHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,7 +36,7 @@ public class CommandProcessor {
                 throw new IllegalArgumentException("Too much arguments for command");
             }
             if (!isCommand(node)) {
-                outputHandler.println("Command doesn't exists");
+                outputHandler.print("Command doesn't exists");
             } else if (array.length == COMMAND_NO_ARG_LENGTH) {
                 Command command = commandsHashMap.get(node);
                 command.proxy(null, outputHandler);
@@ -47,12 +46,12 @@ public class CommandProcessor {
                 command.proxy(argument, outputHandler);
             }
         } catch (IllegalArgumentException | RecursionException e) {
-            outputHandler.println(e.getMessage());
+            outputHandler.print(e.getMessage());
         }
 
     }
 
-    private static boolean isCommand(@NotNull String command) {
+    private static boolean isCommand(String command) {
         return commandsHashMap.containsKey(command);
     }
 
@@ -69,9 +68,9 @@ public class CommandProcessor {
                 parse(String.valueOf(scanner.nextLine()), outputHandler);
             }
         } catch (FileNotFoundException e) {
-            outputHandler.println("File not found exception");
+            outputHandler.print("File not found exception");
         } catch (StackOverflowError e) {
-            outputHandler.println("Recursion script error");
+            outputHandler.print("Recursion script error");
         }
     }
 }

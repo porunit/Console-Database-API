@@ -5,8 +5,7 @@
 package io;
 
 
-import Client.ConsoleInputHandler;
-import Client.ConsoleOutputHandler;
+import Client.io.ConsoleInputHandler;
 
 import java.util.Objects;
 

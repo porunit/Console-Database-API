@@ -1,7 +1,7 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 @NoArguments
 public class ExitCommand extends Command {

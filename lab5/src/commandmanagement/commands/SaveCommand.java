@@ -3,7 +3,7 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import data.StudyGroup;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -24,9 +24,9 @@ public class SaveCommand extends Command {
             for (StudyGroup group : groups) {
                 bw.write(group.toString() + "\n");
             }
-            outputHandler.println("Text written to the file successfully.");
+            outputHandler.print("Text written to the file successfully.");
         } catch (IOException e) {
-            outputHandler.println("IOException catch, it may be due to lack of file permissions");
+            outputHandler.print("IOException catch, it may be due to lack of file permissions");
         }
     }
 

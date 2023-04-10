@@ -1,7 +1,7 @@
 package commandmanagement;
 
 import commandmanagement.commands.NoArguments;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 public abstract class Command {
    public abstract String getDescription();

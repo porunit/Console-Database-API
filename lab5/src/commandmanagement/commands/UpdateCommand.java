@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 public class UpdateCommand extends Command {
     /**
@@ -17,11 +17,11 @@ public class UpdateCommand extends Command {
         try {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
-            outputHandler.println("id must be number");
+            outputHandler.print("id must be number");
             return;
         }
-        if (CollectionManager.isStackEmpty()) outputHandler.println("Collection is empty");
-        else if (!CollectionManager.checkId(id)) outputHandler.println("id doesn't exist");
+        if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
+        else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exist");
         else {
             var group = AddCommand.add();
             group.setId(id);

@@ -4,7 +4,7 @@ import commandmanagement.Command;
 import data.comparators.FormOfEducationComparator;
 import data.FormOfEducation;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class PrintFieldDescendingCommand extends Command {
         for (var it : formOfEducations) {
             System.out.print(it + " | ");
         }
-        outputHandler.println("\n");
+        outputHandler.print("\n");
     }
 
     @Override

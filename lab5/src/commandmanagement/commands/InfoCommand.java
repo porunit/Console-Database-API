@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 @NoArguments
 public class InfoCommand extends Command {
@@ -12,7 +12,7 @@ public class InfoCommand extends Command {
      * Doesn't receive arguments
      */
     public void execute(String argument, OutputHandler outputHandler) {
-        outputHandler.println("type: " + CollectionManager.getCollectionType() + "\n" +
+        outputHandler.print("type: " + CollectionManager.getCollectionType() + "\n" +
                 "creation date: " + CollectionManager.getCreationDate() + "\n" +
                 "size: " + CollectionManager.getAmountElements() +
                 "\n");

@@ -1,9 +1,6 @@
-package io;
+package Client.io;
 
 public interface InputHandler {
     String input();
-
-    boolean hasNext();
-
     void close();
 }

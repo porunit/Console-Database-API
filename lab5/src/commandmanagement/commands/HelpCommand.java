@@ -2,7 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import commandmanagement.CommandMapsBuilder;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 import java.util.HashMap;
 
@@ -19,7 +19,7 @@ public class HelpCommand extends Command {
         StringBuilder builder = new StringBuilder();
         for (var it : commandHashMap.values())
             builder.append(it.getDescription()).append("\n");
-        outputHandler.println(builder.toString());
+        outputHandler.print(builder.toString());
     }
 
     @Override

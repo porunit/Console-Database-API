@@ -3,7 +3,7 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import data.Semester;
 import executionmanager.CollectionManager;
-import io.OutputHandler;
+import Client.io.OutputHandler;
 
 import java.util.NoSuchElementException;
 
@@ -19,12 +19,12 @@ public class FilterBySemesterEnumCommand extends Command {
         try {
             semester = Semester.valueOf(argument);
         } catch (NoSuchElementException | IllegalArgumentException e) {
-            outputHandler.println("No such semester");
+            outputHandler.print("No such semester");
         }
         var groups = CollectionManager.getFilteredBySemesterEnum(semester);
         if (!groups.isEmpty()) {
             for (var it : groups) {
-                outputHandler.println(it.toString());
+                outputHandler.print(it.toString());
             }
         }
     }
