@@ -1,19 +1,20 @@
 /**
  * A utility class for managing user input from the console.
- * Provides methods for reading and parsing user input in various data types and enums.
+ * Provides methods for reading and parsing user input in various Server.data types and enums.
  */
-package io;
+package Client;
 
-
-import Client.ConsoleInputHandler;
-import Client.ConsoleOutputHandler;
+import io.InputHandler;
+import io.OutputHandler;
+import ioserver.ServerInputHandler;
+import ioserver.ServerOutputHandler;
 
 import java.util.Objects;
 
 public class AddInputHelper {
 
-    private static final ConsoleInputHandler reader = new ConsoleInputHandler();
-    private static final ConsoleOutputHandler outputHandler = new ConsoleOutputHandler();
+    private static InputHandler reader;
+    private static OutputHandler outputHandler;
 
     /**
      * Reads the user's input from the console as an enum of the specified type.
@@ -40,14 +41,14 @@ public class AddInputHelper {
     }
 
     /**
-     * Reads the user's input from the console as a data type of the specified class.
+     * Reads the user's input from the console as a Server.data type of the specified class.
      * Prompts the user for input with the given message, and allows the user to enter again
      * if the input is incorrect.
      *
-     * @param dataType   the Class object representing the data type to read
+     * @param dataType   the Class object representing the Server.data type to read
      * @param message    the message to prompt the user for input
      * @param isNullable whether null is an acceptable input
-     * @return the user's input as a data type of the specified class
+     * @return the user's input as a Server.data type of the specified class
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable) {
         while (true) {
@@ -77,15 +78,15 @@ public class AddInputHelper {
     }
 
     /**
-     * A method to read user input from console and convert it to the desired data type with a limit check. Allows the user to enter again
+     * A method to read user input from console and convert it to the desired Server.data type with a limit check. Allows the user to enter again
      * if the input is incorrect.
      *
-     * @param <T>        the generic type of the data to be inputted and returned
-     * @param dataType   the Class object representing the data type to be inputted and returned
+     * @param <T>        the generic type of the Server.data to be inputted and returned
+     * @param dataType   the Class object representing the Server.data type to be inputted and returned
      * @param message    the message to prompt the user for input
      * @param isNullable a boolean indicating whether null is a valid input or not
-     * @param limit      an integer representing the minimum limit for the input, only applicable for numerical data types
-     * @return the parsed input of the desired data type, or null if isNullable is true and input is null
+     * @param limit      an integer representing the minimum limit for the input, only applicable for numerical Server.data types
+     * @return the parsed input of the desired Server.data type, or null if isNullable is true and input is null
      * @throws NumberFormatException if input is not a valid numerical value
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable, int limit) {
@@ -117,5 +118,9 @@ public class AddInputHelper {
                 else return null;
             }
         }
+    }
+    public static void setHandler(ServerInputHandler input, ServerOutputHandler output){
+        reader = input;
+        outputHandler = output;
     }
 }

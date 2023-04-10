@@ -12,9 +12,15 @@ public class ShowCommand extends Command {
      * Doesn't receive arguments
      */
     public void execute(String argument, OutputHandler outputHandler) {
-        for (var group : CollectionManager.getAll()) {
-            outputHandler.println(group.toString());
+        if(CollectionManager.isStackEmpty()){
+            outputHandler.println("Collection is empty");
+            return;
         }
+        StringBuilder builder = new StringBuilder();
+        for (var group : CollectionManager.getAll()) {
+            builder.append(group.toString()).append("\n");
+        }
+        outputHandler.println(builder.toString());
     }
 
     @Override

@@ -1,6 +1,6 @@
 import executionmanager.CommandPrompt;
-import io.console.ConsoleInputHandler;
-import io.console.ConsoleOutputHandler;
+import Client.ConsoleInputHandler;
+import Client.ConsoleOutputHandler;
 
 public class Main {
     public static void main(String[] args) {

@@ -25,7 +25,7 @@ public class PrintFieldDescendingCommand extends Command {
         for (var it : formOfEducations) {
             System.out.print(it + " | ");
         }
-        outputHandler.println();
+        outputHandler.println("\n");
     }
 
     @Override

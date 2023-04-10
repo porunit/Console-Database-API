@@ -4,7 +4,6 @@ import commandmanagement.commands.LoadCommand;
 import io.InputHandler;
 import io.OutputHandler;
 
-
 import java.util.NoSuchElementException;
 
 public class CommandPrompt {
@@ -30,10 +29,8 @@ public class CommandPrompt {
             new LoadCommand().execute(null, outputHandler);
         } catch (NoSuchFieldError e) {
             outputHandler.println("Error While loading");
-        } finally {
-            isLoaded = !CollectionManager.isStackEmpty();
         }
-        while (isLoaded) {
+        while (true) {
             outputHandler.print("Enter command(type help to see command list): ");
             try {
                 command = inputHandler.input();
