@@ -8,12 +8,11 @@ public class ConsoleInputHandler implements InputHandler {
 
     public String input() {
         while(true) {
-            String string;
+            String string = "";
             try {
                 string = reader.nextLine();
             } catch (NoSuchElementException e) {
-                System.out.println("Incorrect input");
-                continue;
+                System.exit(0);
             }
             if (string == null || string.isBlank() || string.isEmpty())
                 return null;

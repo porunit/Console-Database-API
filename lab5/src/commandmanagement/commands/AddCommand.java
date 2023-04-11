@@ -35,6 +35,7 @@ public class AddCommand extends Command {
 
         Location location = new Location(xAdmin, yAdmin, zAdmin);
         Person groupAdmin = new Person(nameAdmin, weightAdmin, eyeColorAdmin, location);
+
         return new StudyGroup(createID(), name, coordinates, studentCount, formOfEducation, semester, groupAdmin);
     }
 

@@ -22,15 +22,17 @@ public class FilterBySemesterEnumCommand extends Command {
             outputHandler.print("No such semester");
         }
         var groups = CollectionManager.getFilteredBySemesterEnum(semester);
+        StringBuilder builder = new StringBuilder();
         if (!groups.isEmpty()) {
             for (var it : groups) {
-                outputHandler.print(it.toString());
+                builder.append(it.toString()).append("\n");
             }
         }
+        outputHandler.print(builder.toString());
     }
 
     @Override
     public String getDescription() {
-        return "filter_by_semester_enum semesterEnum : вывести элементы, значение поля semesterEnum которых равно заданному";
+        return "filter_by_semester semesterEnum : вывести элементы, значение поля semesterEnum которых равно заданному";
     }
 }

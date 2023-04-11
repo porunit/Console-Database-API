@@ -12,6 +12,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(String argument, OutputHandler outputHandler) {
+        outputHandler.print("Server down");
         System.exit(0);
     }
 

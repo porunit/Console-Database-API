@@ -6,6 +6,7 @@ package Client.io;
 
 import data.*;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class AddInputHelper {
@@ -17,7 +18,7 @@ public class AddInputHelper {
 
     public static String add() {
         StringBuilder stringBuilder = new StringBuilder();
-        String name = inputString(String.class, "Name(String):", false);
+        String name = inputString(String.class, "Name(String): ", false);
         Float x = inputString(Float.class, "Coordinates\nx(Float): ", false, COORD_MIN_X);
         Long y = inputString(Long.class, "y(Long): ", false);
         Integer studentCount = inputString(Integer.class, "Students count(Integer): ", true, 0);
@@ -59,12 +60,21 @@ public class AddInputHelper {
      */
     public static <T extends Enum<T>> T inputEnum(Class<T> enumName, String message, boolean isNullable) {
         while (true) {
-            System.out.println(message);
-            var value = reader.input();
+            System.out.print(message);
+            String value = reader.input();
             try {
-                return Enum.valueOf(enumName, Objects.requireNonNull(value));
-            } catch (IllegalArgumentException | NullPointerException e) {
-                if (isNullable && value == null) return null;
+                int id = Integer.parseInt(value) - 1;
+                T[] possibleValues = enumName.getEnumConstants();
+                if (id >= 0 && id < possibleValues.length) {
+                    return possibleValues[id];
+                }
+            } catch (NumberFormatException ignore) {}
+            try {
+                return Enum.valueOf(enumName, Objects.requireNonNull(value.toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Incorrect input");
+            } catch (NullPointerException e){
+                if (isNullable) return null;
                 else System.out.println("Incorrect input");
             }
         }
@@ -82,7 +92,7 @@ public class AddInputHelper {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable) {
         while (true) {
-            System.out.println(message);
+            System.out.print(message);
             var argument = reader.input();
             try {
                 if (dataType == String.class) {
@@ -121,7 +131,7 @@ public class AddInputHelper {
      */
     public static <T> T inputString(Class<T> dataType, String message, boolean isNullable, int limit) {
         while (true) {
-            System.out.println(message);
+            System.out.print(message);
             var argument = reader.input();
             try {
                 T parsedArgument = null;

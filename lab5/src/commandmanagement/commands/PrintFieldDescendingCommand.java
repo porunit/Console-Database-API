@@ -22,10 +22,11 @@ public class PrintFieldDescendingCommand extends Command {
             formOfEducations.add(it.getFormOfEducation());
         }
         formOfEducations.sort(new FormOfEducationComparator());
+        StringBuilder builder = new StringBuilder();
         for (var it : formOfEducations) {
-            System.out.print(it + " | ");
+            builder.append(it).append(" | ");
         }
-        outputHandler.print("\n");
+        outputHandler.print(builder.toString());
     }
 
     @Override

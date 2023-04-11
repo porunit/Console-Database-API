@@ -13,8 +13,9 @@ public class PrintDescendingCommand extends Command {
      */
     public void execute(String argument, OutputHandler outputHandler) {
         var groups = CollectionManager.getAll();
+        StringBuilder builder = new StringBuilder();
         for (var i = groups.size() - 1; i > 0; i--) {
-            outputHandler.print(groups.get(i).toString());
+           builder.append(groups.get(i).toString()).append("\n");
         }
     }
 

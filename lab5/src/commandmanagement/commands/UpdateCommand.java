@@ -27,6 +27,7 @@ public class UpdateCommand extends Command {
             group.setId(id);
             CollectionManager.remove(id);
             CollectionManager.add(group);
+            outputHandler.print("Element updated");
         }
     }
 

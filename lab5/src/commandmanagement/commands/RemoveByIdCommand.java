@@ -21,7 +21,10 @@ public class RemoveByIdCommand extends Command {
         }
         if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
         else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exists");
-        else CollectionManager.remove(id);
+        else{
+            CollectionManager.remove(id);
+            outputHandler.print("Element removed");
+        }
     }
 
     @Override

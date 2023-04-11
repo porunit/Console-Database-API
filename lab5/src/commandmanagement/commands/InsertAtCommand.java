@@ -17,7 +17,10 @@ public class InsertAtCommand extends Command {
             if (index >= 0 && CollectionManager.isStackEmpty() ||
                     index > CollectionManager.getAmountElements() + 1 && !CollectionManager.isStackEmpty())
                 System.out.println("index bigger than must be");
-            else CollectionManager.insertAt(index, AddCommand.add());
+            else {
+                CollectionManager.insertAt(index, AddCommand.add());
+                outputHandler.print("Element added at index " + index);
+            }
         } catch (NumberFormatException | NullPointerException e) {
             System.out.println("Wrong index format");
         }
