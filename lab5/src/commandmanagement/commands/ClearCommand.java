@@ -1,8 +1,8 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 @NoArguments
 public class ClearCommand extends Command {
@@ -12,9 +12,9 @@ public class ClearCommand extends Command {
      * Doesn't receive arguments
      */
     @Override
-    public void execute(String argument, OutputHandler outputHandler) {
+    public void execute(CommandData commandData) {
         CollectionManager.clear();
-        outputHandler.print("Collection cleared");
+        commandData.outputHandler().print("Collection cleared");
     }
 
     @Override

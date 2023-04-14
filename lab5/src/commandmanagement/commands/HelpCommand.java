@@ -1,8 +1,9 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import commandmanagement.CommandMapsBuilder;
-import Client.io.OutputHandler;
 
 import java.util.HashMap;
 
@@ -14,12 +15,14 @@ public class HelpCommand extends Command {
      * Action for <b>help</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
+    @Override
+    public void execute(CommandData commandData) {
+
         HashMap<String, Command> commandHashMap = CommandMapsBuilder.buildCommandMap();
         StringBuilder builder = new StringBuilder();
         for (var it : commandHashMap.values())
             builder.append(it.getDescription()).append("\n");
-        outputHandler.print(builder.toString());
+        commandData.outputHandler().print(builder.toString());
     }
 
     @Override

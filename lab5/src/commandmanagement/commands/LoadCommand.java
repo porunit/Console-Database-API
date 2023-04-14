@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import data.StudyGroup;
 import exceptions.WrongDataTypeException;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,8 @@ public class LoadCommand extends Command {
      * Action for <b>load</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
+    public void execute(CommandData commandData) {
+        var outputHandler = commandData.outputHandler();
         String path = CollectionManager.getFilePath();
         Stack<StudyGroup> groupStack = new Stack<>();
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

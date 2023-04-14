@@ -1,10 +1,12 @@
 package executionmanager;
 
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import commandmanagement.CommandMapsBuilder;
-
+import data.StudyGroup;
 import exceptions.RecursionException;
-import Client.io.OutputHandler;
+import io.OutputHandler;
+import io.network.C2SPackage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,16 +41,25 @@ public class CommandProcessor {
                 outputHandler.print("Command doesn't exists");
             } else if (array.length == COMMAND_NO_ARG_LENGTH) {
                 Command command = commandsHashMap.get(node);
-                command.proxy(null, outputHandler);
+                command.proxy(new CommandData(null, outputHandler, null));
             } else {
                 String argument = array[1];
                 Command command = commandsHashMap.get(node);
-                command.proxy(argument, outputHandler);
+                command.proxy(new CommandData(argument, outputHandler, null));
             }
         } catch (IllegalArgumentException | RecursionException e) {
             outputHandler.print(e.getMessage());
         }
+    }
 
+    public static void parse(C2SPackage payload, OutputHandler outputHandler) {
+        try {
+            var command = commandsHashMap.get(payload.command());
+            CommandData data = new CommandData(payload.arg(), outputHandler, (StudyGroup) payload.group());
+            command.execute(data);
+        } catch (IllegalArgumentException | RecursionException e) {
+            outputHandler.print(e.getMessage());
+        }
     }
 
     private static boolean isCommand(String command) {

@@ -1,13 +1,9 @@
 package commandmanagement.commands;
 
-import commandmanagement.Command;
-import data.*;
-import executionmanager.CollectionManager;
-import io.AddInputHelper;
-import Client.io.OutputHandler;
-import ioserver.ServerInputHandler;
 
-import java.util.Scanner;
+import commandmanagement.Command;
+import commandmanagement.CommandData;
+import executionmanager.CollectionManager;
 
 @NoArguments
 public class AddCommand extends Command {
@@ -17,27 +13,6 @@ public class AddCommand extends Command {
      *
      * @return the newly created StudyGroup instance
      */
-    public static StudyGroup add() {
-        var object = ServerInputHandler.input().split("\n");
-        String name = object[0];
-        Float x = Float.parseFloat(object[1]);
-        Long y = Long.parseLong(object[2]);
-        Coordinates coordinates = new Coordinates(x, y);
-        Integer studentCount = Integer.parseInt(object[3]);
-        FormOfEducation formOfEducation = FormOfEducation.valueOf(object[4]);
-        Semester semester = Semester.valueOf(object[5]);
-        String nameAdmin = object[6];
-        Long weightAdmin = Long.parseLong(object[7]);
-        Color eyeColorAdmin = Color.valueOf(object[8]);
-        float xAdmin = Float.parseFloat(object[9]);
-        Integer yAdmin = Integer.parseInt(object[10]);
-        int zAdmin = Integer.parseInt(object[11]);
-
-        Location location = new Location(xAdmin, yAdmin, zAdmin);
-        Person groupAdmin = new Person(nameAdmin, weightAdmin, eyeColorAdmin, location);
-
-        return new StudyGroup(createID(), name, coordinates, studentCount, formOfEducation, semester, groupAdmin);
-    }
 
     private static long createID() {
         long id = CollectionManager.getAmountElements() + 1;
@@ -53,9 +28,11 @@ public class AddCommand extends Command {
      * Doesn't receive arguments
      */
     @Override
-    public void execute(String argument, OutputHandler outputHandler) {
-        CollectionManager.add(add());
-        outputHandler.print("Element added");
+    public void execute(CommandData commandData) {
+        var group = commandData.group();
+        group.setId(createID());
+        CollectionManager.add(group);
+        commandData.outputHandler().print("Element added");
     }
 
     @Override

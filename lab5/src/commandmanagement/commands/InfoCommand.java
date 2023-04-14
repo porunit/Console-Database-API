@@ -1,8 +1,9 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 @NoArguments
 public class InfoCommand extends Command {
@@ -11,8 +12,9 @@ public class InfoCommand extends Command {
      * Action for <b>info</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
-        outputHandler.print("type: " + CollectionManager.getCollectionType() + "\n" +
+    @Override
+    public void execute(CommandData commandData) {
+        commandData.outputHandler().print("type: " + CollectionManager.getCollectionType() + "\n" +
                 "creation date: " + CollectionManager.getCreationDate() + "\n" +
                 "size: " + CollectionManager.getAmountElements() +
                 "\n");

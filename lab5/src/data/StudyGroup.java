@@ -2,10 +2,11 @@ package data;
 
 import exceptions.WrongDataTypeException;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
 
-public class StudyGroup {
+public class StudyGroup implements Serializable {
     private long id = 1;
     private String name;
     private Coordinates coordinates;

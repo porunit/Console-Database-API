@@ -1,10 +1,10 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
-import data.comparators.FormOfEducationComparator;
+import commandmanagement.CommandData;
 import data.FormOfEducation;
+import data.comparators.FormOfEducationComparator;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,8 @@ public class PrintFieldDescendingCommand extends Command {
      * Action for <b>print_field_descending_form_of_education</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
+    @Override
+    public void execute(CommandData commandData) {
         var groups = CollectionManager.getAll();
         ArrayList<FormOfEducation> formOfEducations = new ArrayList<>();
         for (var it : groups) {
@@ -26,7 +27,7 @@ public class PrintFieldDescendingCommand extends Command {
         for (var it : formOfEducations) {
             builder.append(it).append(" | ");
         }
-        outputHandler.print(builder.toString());
+        commandData.outputHandler().print(builder.toString());
     }
 
     @Override

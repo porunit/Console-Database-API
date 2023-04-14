@@ -1,6 +1,7 @@
-package Client.io;
+package io;
 
 public interface InputHandler {
     String input();
+
     void close();
 }

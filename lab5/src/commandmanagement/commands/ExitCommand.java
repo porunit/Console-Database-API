@@ -1,7 +1,8 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
-import Client.io.OutputHandler;
+import commandmanagement.CommandData;
 
 @NoArguments
 public class ExitCommand extends Command {
@@ -11,8 +12,7 @@ public class ExitCommand extends Command {
      * Doesn't receive arguments
      */
     @Override
-    public void execute(String argument, OutputHandler outputHandler) {
-        outputHandler.print("Server down");
+    public void execute(CommandData commandData) {
         System.exit(0);
     }
 

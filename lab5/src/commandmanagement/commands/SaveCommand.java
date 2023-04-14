@@ -1,9 +1,10 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import data.StudyGroup;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +17,9 @@ public class SaveCommand extends Command {
      * Action for <b>save</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
+    @Override
+    public void execute(CommandData commandData) {
+        var outputHandler = commandData.outputHandler();
         try (FileWriter writer = new FileWriter(CollectionManager.getFilePath());
              BufferedWriter bw = new BufferedWriter(writer)) {
             bw.write("---\n");

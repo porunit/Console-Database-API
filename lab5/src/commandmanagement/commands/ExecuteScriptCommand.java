@@ -1,9 +1,9 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import exceptions.RecursionException;
 import executionmanager.CommandProcessor;
-import Client.io.OutputHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,26 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExecuteScriptCommand extends Command {
-    /**
-     * Action for <b>execute_script</b> command.
-     * Receive arguments
-     *
-     * @param argument command parameter
-     */
-    @Override
-    public void execute(String argument, OutputHandler outputHandler) {
-        String test = checkRecursion(argument, new HashSet<>());
-        if (test != null) {
-            throw new RecursionException("Recursion detected: " + test);
-        }
-        CommandProcessor.executeScript(argument, outputHandler);
-    }
-
-    @Override
-    public String getDescription() {
-        return "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
-    }
-
     public static String checkRecursion(String path, Set<String> used) {
         StringBuilder script = new StringBuilder();
         try (Scanner scanner = new Scanner(new File(path))) {
@@ -56,5 +36,26 @@ public class ExecuteScriptCommand extends Command {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Error while reading the file");
         }
+    }
+
+    /**
+     * Action for <b>execute_script</b> command.
+     * Receive arguments
+     *
+     * @param commandData command parameter
+     */
+    @Override
+    public void execute(CommandData commandData) {
+        var argument = commandData.arg();
+        String test = checkRecursion(argument, new HashSet<>());
+        if (test != null) {
+            throw new RecursionException("Recursion detected: " + test);
+        }
+        CommandProcessor.executeScript(argument, commandData.outputHandler());
+    }
+
+    @Override
+    public String getDescription() {
+        return "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.";
     }
 }

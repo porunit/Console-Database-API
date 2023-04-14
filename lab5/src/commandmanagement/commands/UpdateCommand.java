@@ -1,19 +1,22 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 public class UpdateCommand extends Command {
     /**
      * Action for <b>update</b> command.
      * Receives arguments
      *
-     * @param argument command parameter
+     * @param commandData command parameter
      */
     @Override
-    public void execute(String argument, OutputHandler outputHandler) {
-        long id = 0;
+    public void execute(CommandData commandData) {
+        var argument = commandData.arg();
+        var outputHandler = commandData.outputHandler();
+        long id;
         try {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
@@ -23,7 +26,7 @@ public class UpdateCommand extends Command {
         if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
         else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exist");
         else {
-            var group = AddCommand.add();
+            var group = commandData.group();
             group.setId(id);
             CollectionManager.remove(id);
             CollectionManager.add(group);

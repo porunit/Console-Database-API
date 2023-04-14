@@ -1,8 +1,10 @@
 package executionmanager;
 
+
+import commandmanagement.CommandData;
 import commandmanagement.commands.LoadCommand;
-import Client.io.InputHandler;
-import Client.io.OutputHandler;
+import io.InputHandler;
+import io.OutputHandler;
 
 import java.util.NoSuchElementException;
 
@@ -26,7 +28,7 @@ public class CommandPrompt {
         String command;
         boolean isLoaded;
         try {
-            new LoadCommand().execute(null, outputHandler);
+            new LoadCommand().execute(new CommandData(null, this.outputHandler,null));
         } catch (NoSuchFieldError e) {
             outputHandler.print("Error While loading");
         }

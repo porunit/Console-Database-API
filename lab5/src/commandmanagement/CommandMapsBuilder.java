@@ -2,7 +2,6 @@ package commandmanagement;
 
 import commandmanagement.commands.*;
 
-
 import java.util.HashMap;
 
 public class CommandMapsBuilder {

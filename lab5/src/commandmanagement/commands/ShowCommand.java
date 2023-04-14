@@ -1,8 +1,8 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 @NoArguments
 public class ShowCommand extends Command {
@@ -11,8 +11,10 @@ public class ShowCommand extends Command {
      * Action for <b>show</b> command.
      * Doesn't receive arguments
      */
-    public void execute(String argument, OutputHandler outputHandler) {
-        if(CollectionManager.isStackEmpty()){
+    @Override
+    public void execute(CommandData commandData) {
+        var outputHandler = commandData.outputHandler();
+        if (CollectionManager.isStackEmpty()) {
             outputHandler.print("Collection is empty");
             return;
         }

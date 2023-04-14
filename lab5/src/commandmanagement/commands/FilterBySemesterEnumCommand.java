@@ -1,25 +1,25 @@
 package commandmanagement.commands;
 
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import data.Semester;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
+import io.OutputHandler;
 
 import java.util.NoSuchElementException;
 
 public class FilterBySemesterEnumCommand extends Command {
-    /**
-     * Action for <b>filter_by_semester</b> command.
-     * Receive arguments
-     *
-     * @param argument command parameter
-     */
-    public void execute(String argument, OutputHandler outputHandler) {
-        Semester semester = null;
+
+    @Override
+    public void execute(CommandData commandData) {
+        var argument = commandData.arg();
+        OutputHandler outputHandler = commandData.outputHandler();
+        Semester semester;
         try {
-            semester = Semester.valueOf(argument);
-        } catch (NoSuchElementException | IllegalArgumentException e) {
+            semester = Semester.valueOf(argument.toUpperCase());
+        } catch (NoSuchElementException | IllegalArgumentException | NullPointerException e) {
             outputHandler.print("No such semester");
+            return;
         }
         var groups = CollectionManager.getFilteredBySemesterEnum(semester);
         StringBuilder builder = new StringBuilder();

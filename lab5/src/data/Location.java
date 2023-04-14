@@ -2,7 +2,9 @@ package data;
 
 import exceptions.WrongDataTypeException;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private float x;
     private Integer y; //Поле не может быть null
     private int z;

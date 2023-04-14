@@ -1,8 +1,9 @@
 package commandmanagement.commands;
 
+
 import commandmanagement.Command;
+import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
-import Client.io.OutputHandler;
 
 public class RemoveByIdCommand extends Command {
 
@@ -10,9 +11,12 @@ public class RemoveByIdCommand extends Command {
      * Action for <b>remove</b> command.
      * Receive arguments
      *
-     * @param argument command parameter
+     * @param commandData command parameter
      */
-    public void execute(String argument, OutputHandler outputHandler) {
+    @Override
+    public void execute(CommandData commandData) {
+        var argument = commandData.arg();
+        var outputHandler = commandData.outputHandler();
         long id = 0;
         try {
             id = Long.parseLong(argument);
@@ -21,7 +25,7 @@ public class RemoveByIdCommand extends Command {
         }
         if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
         else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exists");
-        else{
+        else {
             CollectionManager.remove(id);
             outputHandler.print("Element removed");
         }

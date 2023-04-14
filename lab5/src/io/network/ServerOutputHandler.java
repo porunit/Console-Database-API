@@ -1,6 +1,8 @@
-package ioserver;
+package io.network;
 
-import Client.io.OutputHandler;
+
+
+import io.OutputHandler;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -14,22 +16,23 @@ public class ServerOutputHandler implements OutputHandler {
     byte[] sendData;
     int PORT;
 
-    public ServerOutputHandler(DatagramSocket socket, InetAddress address){
+    public ServerOutputHandler(DatagramSocket socket, InetAddress address) {
         IPaddress = address;
         this.socket = socket;
     }
 
-    public void setPort(int port){
+    public void setPort(int port) {
         PORT = port;
     }
+
     @Override
     public void print(String line) {
         sendData = line.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPaddress, PORT);
         try {
             socket.send(sendPacket);
-        }catch (IOException e){
-            System.err.println("IO");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

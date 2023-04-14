@@ -2,7 +2,9 @@ package data;
 
 import exceptions.WrongDataTypeException;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private static final int MIN_WEIGHT = 0;
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long weight; //Поле не может быть null, Значение поля должно быть больше 0
