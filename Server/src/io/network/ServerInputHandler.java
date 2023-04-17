@@ -38,5 +38,5 @@ public class ServerInputHandler {
     public int getLastPort() {
         return lastPort;
     }
-    
+
 }
