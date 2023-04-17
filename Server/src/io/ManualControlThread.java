@@ -10,10 +10,8 @@ import java.util.Scanner;
 
 public class ManualControlThread implements Runnable {
     HashMap<String, Command> manualCommands;
-    OutputHandler outputHandler;
 
-    public ManualControlThread(OutputHandler outputHandler) {
-        this.outputHandler = outputHandler;
+    public ManualControlThread() {
         manualCommands = new HashMap<>();
         manualCommands.put("exit", new ExitCommand());
         manualCommands.put("save", new SaveCommand());

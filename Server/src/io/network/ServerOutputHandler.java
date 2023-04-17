@@ -35,4 +35,13 @@ public class ServerOutputHandler implements OutputHandler {
             System.err.println(e.getMessage());
         }
     }
+    public void print(String line, int port) {
+        sendData = line.getBytes();
+        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPaddress, port);
+        try {
+            socket.send(sendPacket);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
