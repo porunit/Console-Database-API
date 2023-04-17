@@ -9,7 +9,7 @@ import java.net.InetAddress;
 
 
 public class Server {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Thread manualControlThread = new Thread(new ManualControlThread());
         manualControlThread.start();
         NetworkHandler.start();
