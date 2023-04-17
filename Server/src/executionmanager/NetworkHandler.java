@@ -41,6 +41,7 @@ public class NetworkHandler {
     private static void requestHandling() throws IOException, ClassNotFoundException {
         C2SPackage request = inputHandler.input();
         outputHandler.setPort(inputHandler.getLastPort());
+        outputHandler.setIP(inputHandler.getLastIP());
         CommandProcessor.parse(request, outputHandler);
     }
 }

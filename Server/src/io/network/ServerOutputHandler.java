@@ -1,10 +1,11 @@
 package io.network;
 
 
-
 import io.OutputHandler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -25,20 +26,20 @@ public class ServerOutputHandler implements OutputHandler {
         PORT = port;
     }
 
+    public void setIP(InetAddress ip) {
+        IPaddress = ip;
+    }
+
     @Override
     public void print(String line) {
-        sendData = line.getBytes();
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPaddress, PORT);
+        S2CPackage s2CPackage = new S2CPackage(line);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos;
         try {
-            socket.send(sendPacket);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-    public void print(String line, int port) {
-        sendData = line.getBytes();
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPaddress, port);
-        try {
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(s2CPackage);
+            sendData = baos.toByteArray();
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPaddress, PORT);
             socket.send(sendPacket);
         } catch (IOException e) {
             System.err.println(e.getMessage());
