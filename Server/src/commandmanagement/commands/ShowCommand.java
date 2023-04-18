@@ -19,9 +19,7 @@ public class ShowCommand extends Command {
             return;
         }
         StringBuilder builder = new StringBuilder();
-        for (var group : CollectionManager.getAll()) {
-            builder.append(group.toString()).append("\n");
-        }
+        CollectionManager.getAll().forEach(x -> builder.append(x).append('\n'));
         outputHandler.print(builder.toString());
     }
 

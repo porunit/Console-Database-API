@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 
 public class FilterBySemesterEnumCommand extends Command {
 
+
     @Override
     public void execute(CommandData commandData) {
         var argument = commandData.arg();
@@ -22,12 +23,12 @@ public class FilterBySemesterEnumCommand extends Command {
             return;
         }
         var groups = CollectionManager.getFilteredBySemesterEnum(semester);
-        StringBuilder builder = new StringBuilder();
-        if (!groups.isEmpty()) {
-            for (var it : groups) {
-                builder.append(it.toString()).append("\n");
-            }
+        if (groups.isEmpty()) {
+            outputHandler.print("No groups with such semester");
+            return;
         }
+        StringBuilder builder = new StringBuilder();
+        groups.forEach(x -> builder.append(x.toString()).append("\n"));
         outputHandler.print(builder.toString());
     }
 

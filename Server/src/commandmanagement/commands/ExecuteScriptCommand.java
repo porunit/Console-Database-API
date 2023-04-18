@@ -4,6 +4,7 @@ import commandmanagement.Command;
 import commandmanagement.CommandData;
 import exceptions.RecursionException;
 import executionmanager.CommandProcessor;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExecuteScriptCommand extends Command {
+    private final Logger log = Logger.getLogger(ExecuteScriptCommand.class);
     public static String checkRecursion(String path, Set<String> used) {
         StringBuilder script = new StringBuilder();
         try (Scanner scanner = new Scanner(new File(path))) {
@@ -34,7 +36,7 @@ public class ExecuteScriptCommand extends Command {
             }
             return null;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Error while reading the file");
+            throw new RuntimeException();
         }
     }
 
@@ -47,8 +49,13 @@ public class ExecuteScriptCommand extends Command {
     @Override
     public void execute(CommandData commandData) {
         var argument = commandData.arg();
-        String test = checkRecursion(argument, new HashSet<>());
-        if (test != null) {
+        String test = null;
+        try {
+            test = checkRecursion(argument, new HashSet<>());
+        }catch (RuntimeException e){
+            log.error(e.getMessage());
+        }
+        if(test!=null){
             throw new RecursionException("Recursion detected: " + test);
         }
         CommandProcessor.executeScript(argument, commandData.outputHandler());

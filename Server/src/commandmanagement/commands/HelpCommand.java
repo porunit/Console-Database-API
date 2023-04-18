@@ -17,11 +17,9 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute(CommandData commandData) {
-
         HashMap<String, Command> commandHashMap = CommandMapsBuilder.buildCommandMap();
         StringBuilder builder = new StringBuilder();
-        for (var it : commandHashMap.values())
-            builder.append(it.getDescription()).append("\n");
+        commandHashMap.values().forEach(x -> builder.append(x.getDescription()).append("\n"));
         commandData.outputHandler().print(builder.toString());
     }
 

@@ -19,14 +19,11 @@ public class PrintFieldDescendingCommand extends Command {
     public void execute(CommandData commandData) {
         var groups = CollectionManager.getAll();
         ArrayList<FormOfEducation> formOfEducations = new ArrayList<>();
-        for (var it : groups) {
-            formOfEducations.add(it.getFormOfEducation());
-        }
+        groups.forEach(x -> formOfEducations.add(x.getFormOfEducation()));
+
         formOfEducations.sort(new FormOfEducationComparator());
         StringBuilder builder = new StringBuilder();
-        for (var it : formOfEducations) {
-            builder.append(it).append(" | ");
-        }
+        formOfEducations.forEach(x->builder.append(x).append(" | "));
         commandData.outputHandler().print(builder.toString());
     }
 

@@ -3,7 +3,10 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import commandmanagement.CommandData;
+import data.StudyGroup;
 import executionmanager.CollectionManager;
+
+import java.util.Comparator;
 
 @NoArguments
 public class PrintDescendingCommand extends Command {
@@ -16,9 +19,9 @@ public class PrintDescendingCommand extends Command {
     public void execute(CommandData commandData) {
         var groups = CollectionManager.getAll();
         StringBuilder builder = new StringBuilder();
-        for (var i = groups.size() - 1; i > 0; i--) {
-            builder.append(groups.get(i).toString()).append("\n");
-        }
+        groups.stream()
+                .sorted(Comparator.comparingLong(StudyGroup::getId).reversed())
+                .forEach(x-> builder.append(x).append("\n"));
         commandData.outputHandler().print(builder.toString());
     }
 
