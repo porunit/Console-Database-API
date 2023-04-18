@@ -5,6 +5,7 @@ import commandmanagement.Command;
 import commandmanagement.CommandData;
 import data.StudyGroup;
 import executionmanager.CollectionManager;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,14 +13,13 @@ import java.io.IOException;
 
 @NoArguments
 public class SaveCommand extends Command {
-
+    private final Logger log = Logger.getLogger(SaveCommand.class);
     /**
      * Action for <b>save</b> command.
      * Doesn't receive arguments
      */
     @Override
     public void execute(CommandData commandData) {
-        var outputHandler = commandData.outputHandler();
         try (FileWriter writer = new FileWriter(CollectionManager.getFilePath());
              BufferedWriter bw = new BufferedWriter(writer)) {
             bw.write("---\n");
@@ -27,9 +27,9 @@ public class SaveCommand extends Command {
             for (StudyGroup group : groups) {
                 bw.write(group.toString() + "\n");
             }
-            outputHandler.print("Text written to the file successfully.");
+            log.info("Data saved to file");
         } catch (IOException e) {
-            outputHandler.print("IOException catch, it may be due to lack of file permissions");
+            log.error(e.getMessage());
         }
     }
 

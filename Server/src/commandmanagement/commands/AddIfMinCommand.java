@@ -4,8 +4,10 @@ import commandmanagement.Command;
 import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
 import io.OutputHandler;
+import org.apache.log4j.Logger;
 
 public class AddIfMinCommand extends Command {
+    private final Logger log = Logger.getLogger(AddIfMinCommand.class);
 
     /**
      * Action for <b>add_if_min</b> command.
@@ -22,15 +24,19 @@ public class AddIfMinCommand extends Command {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
             outputHandler.print("id must be number");
+            log.warn("Element didnt insert wrong id format {" + argument + "}");
             return;
         }
         if (id <= 0) outputHandler.print("Id must be bigger then 0");
-        else if (CollectionManager.checkId(id)) outputHandler.print("id exists");
-        else if (id < CollectionManager.getMinId() || CollectionManager.getMinId() == 0) {
+        else if (CollectionManager.checkId(id)) {
+            outputHandler.print("id exists");
+            log.warn("Element didnt insert, id exists {" + argument + "}");
+        } else if (id < CollectionManager.getMinId() || CollectionManager.getMinId() == 0) {
             var group = commandData.group();
             group.setId(id);
             CollectionManager.add(group);
             outputHandler.print("Element added");
+            log.info("Element added {" + group.getId()+"}");
         } else outputHandler.print("Id not min");
     }
 

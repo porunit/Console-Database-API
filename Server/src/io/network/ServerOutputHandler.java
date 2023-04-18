@@ -17,8 +17,7 @@ public class ServerOutputHandler implements OutputHandler {
     byte[] sendData;
     int PORT;
 
-    public ServerOutputHandler(DatagramSocket socket, InetAddress address) {
-        IPaddress = address;
+    public ServerOutputHandler(DatagramSocket socket) {
         this.socket = socket;
     }
 

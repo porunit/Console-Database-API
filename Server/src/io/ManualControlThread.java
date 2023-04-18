@@ -20,7 +20,6 @@ public class ManualControlThread implements Runnable {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Введите комманду: ");
             String input = scanner.nextLine();
             try {
                 parse(input);
@@ -40,7 +39,7 @@ public class ManualControlThread implements Runnable {
         if (!manualCommands.containsKey(commandName)) {
             throw new IllegalArgumentException("Command doesn't exists");
         }
-        manualCommands.get(commandName).execute(new CommandData(null, new ConsoleOutputHandler(), null));
+        manualCommands.get(node).execute(new CommandData(null, new ConsoleOutputHandler(), null));
     }
 }
 

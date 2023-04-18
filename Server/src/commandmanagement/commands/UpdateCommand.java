@@ -4,8 +4,11 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
+import org.apache.log4j.Logger;
 
 public class UpdateCommand extends Command {
+    private final Logger log = Logger.getLogger(UpdateCommand.class);
+
     /**
      * Action for <b>update</b> command.
      * Receives arguments
@@ -21,16 +24,22 @@ public class UpdateCommand extends Command {
             id = Long.parseLong(argument);
         } catch (NumberFormatException e) {
             outputHandler.print("id must be number");
+            log.warn("Element didnt update, wrong id format {" + argument + "}");
             return;
         }
-        if (CollectionManager.isStackEmpty()) outputHandler.print("Collection is empty");
-        else if (!CollectionManager.checkId(id)) outputHandler.print("id doesn't exist");
-        else {
+        if (CollectionManager.isStackEmpty()) {
+            outputHandler.print("Collection is empty");
+            log.warn("Element didnt update, empty collection {" + argument + "}");
+        } else if (!CollectionManager.checkId(id)) {
+            outputHandler.print("id doesn't exist");
+            log.warn("Element didnt update, id doesnt exist {" + argument + "}");
+        } else {
             var group = commandData.group();
             group.setId(id);
             CollectionManager.remove(id);
             CollectionManager.add(group);
             outputHandler.print("Element updated");
+            log.info("Element {" + id + "} updated");
         }
     }
 

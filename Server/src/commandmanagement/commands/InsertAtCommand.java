@@ -4,8 +4,11 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
+import org.apache.log4j.Logger;
 
 public class InsertAtCommand extends Command {
+    private final Logger log = Logger.getLogger(InsertAtCommand.class);
+
     /**
      * Action for <b>insert_at</b> command.
      * Receive arguments
@@ -18,14 +21,18 @@ public class InsertAtCommand extends Command {
         try {
             int index = Integer.parseInt(argument);
             if (index >= 0 && CollectionManager.isStackEmpty() ||
-                    index > CollectionManager.getAmountElements() + 1 && !CollectionManager.isStackEmpty())
-                System.out.println("index bigger than must be");
+                    index > CollectionManager.getAmountElements() + 1 && !CollectionManager.isStackEmpty()) {
+                commandData.outputHandler().print("index bigger than must be");
+                log.warn("Element didnt insert wrong index format {"+argument+"}");
+            }
             else {
                 CollectionManager.insertAt(index, commandData.group());
                 commandData.outputHandler().print("Element added at index " + index);
+                log.info("Element added at index " + index);
             }
         } catch (NumberFormatException | NullPointerException e) {
             commandData.outputHandler().print("Wrong index format");
+            log.warn("Element didnt insert, wrong index format {"+argument+"}");
         }
     }
 
