@@ -19,21 +19,6 @@ public class ClientOutputHandler implements OutputHandler {
         int SERVER_PORT = 228;
         serverAddress = new InetSocketAddress("localhost", SERVER_PORT);
     }
-
-    @Override
-    public void print(String message) {
-        int BUFFER_CAPACITY = 10000;
-        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
-        buffer.put(message.getBytes());
-        buffer.flip();
-        try {
-            channel.send(buffer, serverAddress);
-        } catch (IOException e) {
-            System.err.println("IO");
-        }
-        buffer.clear();
-    }
-
     @Override
     public void printObj(C2SPackage command) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
