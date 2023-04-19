@@ -23,16 +23,15 @@ public class InsertAtCommand extends Command {
             if (index >= 0 && CollectionManager.isStackEmpty() ||
                     index > CollectionManager.getAmountElements() + 1 && !CollectionManager.isStackEmpty()) {
                 commandData.outputHandler().print("index bigger than must be");
-                log.warn("Element didnt insert wrong index format {"+argument+"}");
-            }
-            else {
+                log.warn("Element didnt insert wrong index format {" + argument + "}");
+            } else {
                 CollectionManager.insertAt(index, commandData.group());
                 commandData.outputHandler().print("Element added at index " + index);
                 log.info("Element added at index " + index);
             }
         } catch (NumberFormatException | NullPointerException e) {
             commandData.outputHandler().print("Wrong index format");
-            log.warn("Element didnt insert, wrong index format {"+argument+"}");
+            log.warn("Element didnt insert, wrong index format {" + argument + "}");
         }
     }
 

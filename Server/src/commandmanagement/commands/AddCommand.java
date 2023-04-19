@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 public class AddCommand extends Command {
 
     private final Logger log = Logger.getLogger(AddCommand.class);
+
     /**
      * Creates a new StudyGroup instance based on user input and adds it to the collection
      *
@@ -35,7 +36,7 @@ public class AddCommand extends Command {
         group.setId(createID());
         CollectionManager.add(group);
         commandData.outputHandler().print("Element added");
-        log.info("Element added {"+ group.getId()+"}");
+        log.info("Element added {" + group.getId() + "}");
     }
 
     @Override

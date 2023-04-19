@@ -36,7 +36,7 @@ public class AddIfMinCommand extends Command {
             group.setId(id);
             CollectionManager.add(group);
             outputHandler.print("Element added");
-            log.info("Element added {" + group.getId()+"}");
+            log.info("Element added {" + group.getId() + "}");
         } else outputHandler.print("Id not min");
     }
 

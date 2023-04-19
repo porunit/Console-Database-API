@@ -9,7 +9,6 @@ import commandmanagement.CommandData;
 import data.StudyGroup;
 import exceptions.WrongDataTypeException;
 import executionmanager.CollectionManager;
-
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -19,6 +18,7 @@ import java.util.Stack;
 @NoArguments
 public class LoadCommand extends Command {
     private final Logger log = Logger.getLogger(LoadCommand.class);
+
     /**
      * Action for <b>load</b> command.
      * Doesn't receive arguments
@@ -26,7 +26,7 @@ public class LoadCommand extends Command {
     public void execute(CommandData commandData) {
         var outputHandler = commandData.outputHandler();
         String path = CollectionManager.getFilePath();
-        Stack<StudyGroup> groupStack = new Stack<>();
+        Stack<StudyGroup> groupStack;
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             groupStack = mapper.readValue(new File(path), new TypeReference<Stack<StudyGroup>>() {
@@ -34,9 +34,11 @@ public class LoadCommand extends Command {
         } catch (DatabindException e) {
             outputHandler.print("'" + path + "' contains broken data");
             log.warn("File didnt loaded '" + path + "' contains broken data");
+            return;
         } catch (IOException e) {
             outputHandler.print("Unable to load '" + path + "' No such file\n");
             log.warn("File didnt loaded'\" + path + \"' No such file");
+            return;
         }
         CollectionManager.load(groupStack);
         try {
@@ -44,6 +46,7 @@ public class LoadCommand extends Command {
         } catch (WrongDataTypeException e) {
             outputHandler.print("ID's must be different");
             log.warn("File didnt loaded: wrong id");
+            return;
         }
         CollectionManager.sort();
         outputHandler.print("File was loaded");

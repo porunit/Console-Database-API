@@ -4,4 +4,5 @@ import java.io.Serializable;
 
 public record S2CPackage(
         String response
-) implements Serializable {}
+) implements Serializable {
+}

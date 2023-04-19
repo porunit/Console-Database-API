@@ -1,16 +1,12 @@
 package io.network;
 
-import io.InputHandler;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
-public class ClientInputHandler{
+public class ClientInputHandler {
     DatagramChannel channel;
 
     public ClientInputHandler(DatagramChannel chanel) {
@@ -18,7 +14,8 @@ public class ClientInputHandler{
     }
 
     public S2CPackage input() throws IOException, ClassNotFoundException {
-        ByteBuffer buffer = ByteBuffer.allocate(10000);
+        int BUFFER_CAPACITY = 10000;
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
         channel.receive(buffer);
         buffer.flip();
         byte[] data = new byte[buffer.limit()];

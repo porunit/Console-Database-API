@@ -4,17 +4,10 @@ package executionmanager;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import commandmanagement.CommandMapsBuilder;
-import exceptions.RecursionException;
 import io.OutputHandler;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Scanner;
-
 
 
 public class CommandProcessor {
@@ -34,22 +27,22 @@ public class CommandProcessor {
      * @param commandName a string representing the command input to parse
      */
     public static void parse(String commandName, OutputHandler outputHandler) throws IOException {
-            if (commandName == null) return;
-            String[] array = commandName.split("\\s+");
-            var node = array[0];
-            if (array.length > COMMAND_MAX_ARG_LENGTH) {
-                throw new IllegalArgumentException("Too much arguments for command");
-            }
-            if (!isCommand(node)) {
-                throw new IllegalArgumentException("Command doesn't exists");
-            } else if (array.length == COMMAND_NO_ARG_LENGTH) {
-                Command command = commandsHashMap.get(node);
-                command.proxy(new CommandData(null, outputHandler));
-            } else {
-                String argument = array[1];
-                Command command = commandsHashMap.get(node);
-                command.proxy(new CommandData(argument, outputHandler));
-            }
+        if (commandName == null) return;
+        String[] array = commandName.split("\\s+");
+        var node = array[0];
+        if (array.length > COMMAND_MAX_ARG_LENGTH) {
+            throw new IllegalArgumentException("Too much arguments for command");
+        }
+        if (!isCommand(node)) {
+            throw new IllegalArgumentException("Command doesn't exists");
+        } else if (array.length == COMMAND_NO_ARG_LENGTH) {
+            Command command = commandsHashMap.get(node);
+            command.proxy(new CommandData(null, outputHandler));
+        } else {
+            String argument = array[1];
+            Command command = commandsHashMap.get(node);
+            command.proxy(new CommandData(argument, outputHandler));
+        }
     }
 
     private static boolean isCommand(String command) {

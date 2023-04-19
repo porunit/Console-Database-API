@@ -16,7 +16,7 @@ public class RemoveByIdCommand extends Command {
      */
     @Override
     public void execute(CommandData commandData) throws IOException {
-        commandData.outputHandler().printObj(new C2SPackage("remove_by_id", commandData.arg(), null));
+        commandData.outputHandler().printObj(new C2SPackage("remove", commandData.arg(), null));
     }
 
     @Override

@@ -14,11 +14,11 @@ public class ShowCommand extends Command {
      * Doesn't receive arguments
      */
     @Override
-    public void execute(CommandData commandData){
+    public void execute(CommandData commandData) {
         try {
             C2SPackage payload = new C2SPackage("show", commandData.arg(), null);
             commandData.outputHandler().printObj(payload);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("IOshow");
         }
     }

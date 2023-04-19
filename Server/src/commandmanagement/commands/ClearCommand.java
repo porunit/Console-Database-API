@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 @NoArguments
 public class ClearCommand extends Command {
     private final org.apache.log4j.Logger log = Logger.getLogger(ClearCommand.class);
+
     /**
      * Action for <b>clear</b> command.
      * Doesn't receive arguments

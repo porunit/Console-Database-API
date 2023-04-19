@@ -4,7 +4,8 @@ import data.StudyGroup;
 import io.OutputHandler;
 
 public record CommandData(
-       String arg,
-       OutputHandler outputHandler,
-       StudyGroup group
-){}
+        String arg,
+        OutputHandler outputHandler,
+        StudyGroup group
+) {
+}

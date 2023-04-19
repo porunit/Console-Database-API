@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 @NoArguments
 public class SaveCommand extends Command {
     private final Logger log = Logger.getLogger(SaveCommand.class);
+
     /**
      * Action for <b>save</b> command.
      * Doesn't receive arguments

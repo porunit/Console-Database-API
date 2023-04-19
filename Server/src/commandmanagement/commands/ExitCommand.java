@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 @NoArguments
 public class ExitCommand extends Command {
     private final Logger log = Logger.getLogger(ExitCommand.class);
+
     /**
      * Action for <b>exit</b> command.
      * Doesn't receive arguments

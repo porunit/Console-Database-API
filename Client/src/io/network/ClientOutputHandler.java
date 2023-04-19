@@ -16,12 +16,14 @@ public class ClientOutputHandler implements OutputHandler {
 
     public ClientOutputHandler(DatagramChannel channel) {
         this.channel = channel;
-        serverAddress = new InetSocketAddress("localhost", 228);
+        int SERVER_PORT = 228;
+        serverAddress = new InetSocketAddress("localhost", SERVER_PORT);
     }
 
     @Override
     public void print(String message) {
-        ByteBuffer buffer = ByteBuffer.allocate(10000);
+        int BUFFER_CAPACITY = 10000;
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
         buffer.put(message.getBytes());
         buffer.flip();
         try {
@@ -31,6 +33,7 @@ public class ClientOutputHandler implements OutputHandler {
         }
         buffer.clear();
     }
+
     @Override
     public void printObj(C2SPackage command) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

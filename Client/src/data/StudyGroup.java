@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
 
-
 public class StudyGroup implements Serializable {
     private long id = 1;
     private String name;

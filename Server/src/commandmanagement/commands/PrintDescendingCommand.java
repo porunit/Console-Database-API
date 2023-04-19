@@ -21,7 +21,7 @@ public class PrintDescendingCommand extends Command {
         StringBuilder builder = new StringBuilder();
         groups.stream()
                 .sorted(Comparator.comparingLong(StudyGroup::getId).reversed())
-                .forEach(x-> builder.append(x).append("\n"));
+                .forEach(x -> builder.append(x).append("\n"));
         commandData.outputHandler().print(builder.toString());
     }
 

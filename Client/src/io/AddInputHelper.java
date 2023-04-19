@@ -5,50 +5,12 @@
 package io;
 
 
-
-import data.Color;
-import data.FormOfEducation;
-import data.Semester;
-
 import java.util.Objects;
 
 public class AddInputHelper {
 
     private static final ConsoleInputHandler reader = new ConsoleInputHandler();
-    private static final int COORD_MIN_X = -156;
-    private static final int PERSON_MIN_WEIGHT = 0;
 
-
-    public static String add() {
-        StringBuilder stringBuilder = new StringBuilder();
-        String name = inputString(String.class, "Name(String): ", false);
-        Float x = inputString(Float.class, "Coordinates\nx(Float): ", false, COORD_MIN_X);
-        Long y = inputString(Long.class, "y(Long): ", false);
-        Integer studentCount = inputString(Integer.class, "Students count(Integer): ", true, 0);
-        FormOfEducation formOfEducation = inputEnum(FormOfEducation.class, "Form of education(DISTANCE_EDUCATION,FULL_TIME_EDUCATION, EVENING_CLASSES): ", true);
-        Semester semester = inputEnum(Semester.class, "Semester(SECOND,THIRD,SIXTH): ", false);
-        String nameAdmin = inputString(String.class, "Group admin\nName(String): ", false);
-        Long weightAdmin = inputString(Long.class, "Weight(Long): ", false, PERSON_MIN_WEIGHT);
-        Color eyeColorAdmin = AddInputHelper.inputEnum(Color.class, "Eye color(RED,YELLOW,BLACK): ", true);
-        float xAdmin = inputString(Float.class, "Location\nx(float): ", false);
-        Integer yAdmin = inputString(Integer.class, "y(Integer): ", false);
-        int zAdmin = inputString(Integer.class, "z(int): ", false);
-
-        stringBuilder.append(name).append("\n");
-        stringBuilder.append(x).append("\n");
-        stringBuilder.append(y).append("\n");
-        stringBuilder.append(studentCount).append("\n");
-        stringBuilder.append(formOfEducation).append("\n");
-        stringBuilder.append(semester).append("\n");
-        stringBuilder.append(nameAdmin).append("\n");
-        stringBuilder.append(weightAdmin).append("\n");
-        stringBuilder.append(eyeColorAdmin).append("\n");
-        stringBuilder.append(xAdmin).append("\n");
-        stringBuilder.append(yAdmin).append("\n");
-        stringBuilder.append(zAdmin).append("\n");
-
-        return stringBuilder.toString();
-    }
 
     /**
      * Reads the user's input from the console as an enum of the specified type.

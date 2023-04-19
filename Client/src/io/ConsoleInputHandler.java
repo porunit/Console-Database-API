@@ -3,13 +3,13 @@ package io;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ConsoleInputHandler{
+public class ConsoleInputHandler {
     private static final Scanner reader = new Scanner(System.in);
 
 
     public String inputCommand() {
         String string = null;
-        while(string == null || string.isBlank() || string.isEmpty()) {
+        while (string == null || string.isBlank() || string.isEmpty()) {
             try {
                 string = reader.nextLine();
             } catch (NoSuchElementException e) {

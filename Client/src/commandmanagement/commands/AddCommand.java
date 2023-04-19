@@ -2,7 +2,6 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import commandmanagement.CommandData;
-
 import data.*;
 import io.AddInputHelper;
 import io.network.C2SPackage;

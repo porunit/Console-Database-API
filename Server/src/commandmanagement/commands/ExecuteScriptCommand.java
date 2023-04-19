@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class ExecuteScriptCommand extends Command {
     private final Logger log = Logger.getLogger(ExecuteScriptCommand.class);
+
     public static String checkRecursion(String path, Set<String> used) {
         StringBuilder script = new StringBuilder();
         try (Scanner scanner = new Scanner(new File(path))) {
@@ -52,10 +53,10 @@ public class ExecuteScriptCommand extends Command {
         String test = null;
         try {
             test = checkRecursion(argument, new HashSet<>());
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             log.error(e.getMessage());
         }
-        if(test!=null){
+        if (test != null) {
             throw new RecursionException("Recursion detected: " + test);
         }
         CommandProcessor.executeScript(argument, commandData.outputHandler());

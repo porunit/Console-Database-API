@@ -23,7 +23,7 @@ public class PrintFieldDescendingCommand extends Command {
 
         formOfEducations.sort(new FormOfEducationComparator());
         StringBuilder builder = new StringBuilder();
-        formOfEducations.forEach(x->builder.append(x).append(" | "));
+        formOfEducations.forEach(x -> builder.append(x).append(" | "));
         commandData.outputHandler().print(builder.toString());
     }
 
