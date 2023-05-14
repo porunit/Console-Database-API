@@ -19,7 +19,6 @@ public class UpdateCommand extends Command {
     public void execute(CommandData commandData) throws IOException {
         commandData.outputHandler().printObj(new C2SPackage("update", commandData.arg(), add()));
     }
-
     @Override
     public String getDescription() {
         return "update id {element} : обновить значение элемента коллекции, id которого равен заданному";

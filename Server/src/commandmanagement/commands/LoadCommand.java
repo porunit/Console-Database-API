@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.Stack;
 
 @NoArguments
@@ -35,7 +36,7 @@ public class LoadCommand extends Command {
             outputHandler.print("'" + path + "' contains broken data");
             log.warn("File didnt loaded '" + path + "' contains broken data");
             return;
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             outputHandler.print("Unable to load '" + path + "' No such file\n");
             log.warn("File didnt loaded'\" + path + \"' No such file");
             return;

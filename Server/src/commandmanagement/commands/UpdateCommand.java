@@ -42,7 +42,6 @@ public class UpdateCommand extends Command {
             log.info("Element {" + id + "} updated");
         }
     }
-
     @Override
     public String getDescription() {
         return "update id {element} : обновить значение элемента коллекции, id которого равен заданному";

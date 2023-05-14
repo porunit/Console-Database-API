@@ -15,7 +15,7 @@ public class NetworkHandler {
     static DatagramSocket serverSocket;
     static ServerInputHandler inputHandler;
     static ServerOutputHandler outputHandler;
-    static int SERVER_PORT = 228;
+    static int SERVER_PORT = 64999;
 
     public static void start() {
         try {
@@ -40,7 +40,7 @@ public class NetworkHandler {
         log.debug("Payload get (" + request.command() + ") from: " + inputHandler.getLastIP() + ":" + inputHandler.getLastPort());
         outputHandler.setPort(inputHandler.getLastPort());
         outputHandler.setIP(inputHandler.getLastIP());
-        CommandProcessor.parse(request, outputHandler);
+        CommandProcessor.parse(request, outputHandler, inputHandler);
         log.debug("Payload sent response to: " + inputHandler.getLastIP() + ":" + inputHandler.getLastPort());
     }
 }

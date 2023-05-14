@@ -34,6 +34,7 @@ public class RemoveByIdCommand extends Command {
             log.warn("Element didnt remove, id doesnt exists {" + argument + "}");
         } else {
             CollectionManager.remove(id);
+            CollectionManager.removeId(id);
             outputHandler.print("Element removed");
             log.info("Element {" + id + "} removed");
         }

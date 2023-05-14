@@ -20,15 +20,15 @@ public class ServerInputHandler {
     }
 
     public C2SPackage input() throws IOException, ClassNotFoundException {
-        byte[] buffer = new byte[10000];
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        socket.receive(packet);
-        lastPort = packet.getPort();
-        lastIP = packet.getAddress();
-        byte[] data = packet.getData();
-        ByteArrayInputStream bais = new ByteArrayInputStream(data);
-        ObjectInputStream ois = new ObjectInputStream(bais);
-        return (C2SPackage) ois.readObject();
+            byte[] buffer = new byte[10000];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            socket.receive(packet);
+            lastPort = packet.getPort();
+            lastIP = packet.getAddress();
+            byte[] data = packet.getData();
+            ByteArrayInputStream bais = new ByteArrayInputStream(data);
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (C2SPackage) ois.readObject();
     }
 
     public InetAddress getLastIP() {

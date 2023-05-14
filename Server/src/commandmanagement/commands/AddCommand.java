@@ -33,7 +33,9 @@ public class AddCommand extends Command {
     @Override
     public void execute(CommandData commandData) {
         var group = commandData.group();
-        group.setId(createID());
+        var id = createID();
+        group.setId(id);
+        CollectionManager.joinId(id);
         CollectionManager.add(group);
         commandData.outputHandler().print("Element added");
         log.info("Element added {" + group.getId() + "}");

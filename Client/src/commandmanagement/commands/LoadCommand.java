@@ -20,7 +20,7 @@ public class LoadCommand extends Command {
 
     @Override
     public String getDescription() {
-        return "load path: загрузить коллекцию из файла";
+        return "load: загрузить коллекцию из файла";
     }
 
 }

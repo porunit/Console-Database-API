@@ -3,13 +3,17 @@ package executionmanager;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import commandmanagement.CommandMapsBuilder;
+import commandmanagement.commands.IdValidator;
 import data.StudyGroup;
 import exceptions.RecursionException;
 import io.OutputHandler;
 import io.network.C2SPackage;
+import io.network.ServerInputHandler;
+import io.network.ServerOutputHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -52,13 +56,24 @@ public class CommandProcessor {
         }
     }
 
-    public static void parse(C2SPackage payload, OutputHandler outputHandler) {
+    public static void parse(C2SPackage payload, OutputHandler outputHandler, ServerInputHandler inputHandler) {
         try {
+            if (payload.command().equals("validate")) {
+                if (new IdValidator(inputHandler, (ServerOutputHandler) outputHandler).validateId(payload.arg())) {
+                    payload = inputHandler.input();
+                } else {
+                    return;
+                }
+            }
             var command = commandsHashMap.get(payload.command());
             CommandData data = new CommandData(payload.arg(), outputHandler, (StudyGroup) payload.group());
             command.execute(data);
         } catch (IllegalArgumentException | RecursionException e) {
             outputHandler.print(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

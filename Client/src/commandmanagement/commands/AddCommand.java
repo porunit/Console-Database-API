@@ -12,6 +12,7 @@ import java.io.IOException;
 @NoArguments
 public class AddCommand extends Command {
 
+    private final static int DEFAULT_ID = 2;
     /**
      * Creates a new StudyGroup instance based on user input and adds it to the collection
      *
@@ -34,7 +35,7 @@ public class AddCommand extends Command {
 
         Location location = new Location(xAdmin, yAdmin, zAdmin);
         Person groupAdmin = new Person(nameAdmin, weightAdmin, eyeColorAdmin, location);
-        return new StudyGroup(2, name, coordinates, studentCount, formOfEducation, semester, groupAdmin);
+        return new StudyGroup(DEFAULT_ID, name, coordinates, studentCount, formOfEducation, semester, groupAdmin);
     }
 
 

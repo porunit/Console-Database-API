@@ -1,1 +1,0 @@
-execute_script /Users/porunit/Desktop/lab/Prog/Lab6/student-18/Server/src/recources/script.txt

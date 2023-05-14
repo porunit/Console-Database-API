@@ -3,6 +3,7 @@ package io.network;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
@@ -13,7 +14,7 @@ public class ClientInputHandler {
         channel = chanel;
     }
 
-    public S2CPackage input() throws IOException, ClassNotFoundException {
+    public S2CPackage input() throws IOException, ClassNotFoundException, SocketTimeoutException {
         int BUFFER_CAPACITY = 10000;
         ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
         channel.receive(buffer);

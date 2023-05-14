@@ -16,7 +16,7 @@ public class ClientOutputHandler implements OutputHandler {
 
     public ClientOutputHandler(DatagramChannel channel) {
         this.channel = channel;
-        int SERVER_PORT = 228;
+        int SERVER_PORT = 64999;
         serverAddress = new InetSocketAddress("localhost", SERVER_PORT);
     }
     @Override

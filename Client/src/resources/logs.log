@@ -92,3 +92,59 @@
 19/04/23 13:10:19 [DEBUG] Payload get from server
 19/04/23 13:10:21 [DEBUG] Payload (show) sent to server
 19/04/23 13:10:21 [DEBUG] Payload get from server
+19/04/23 13:15:00 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3195
+19/04/23 13:15:01 [DEBUG] Payload (info) sent to server
+19/04/23 13:15:01 [DEBUG] Payload get from server
+19/04/23 15:33:14 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3348
+19/04/23 15:34:09 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3537
+19/04/23 15:34:17 [DEBUG] Payload (info) sent to server
+19/04/23 15:34:17 [DEBUG] Payload get from server
+19/04/23 15:34:23 [DEBUG] Payload (info) sent to server
+19/04/23 15:34:23 [DEBUG] Payload get from server
+19/04/23 15:35:08 [DEBUG] Payload (info) sent to server
+19/04/23 15:35:09 [WARN] Server didnt response
+19/04/23 15:35:25 [DEBUG] Payload (info) sent to server
+19/04/23 15:35:25 [DEBUG] Payload get from server
+19/04/23 15:35:32 [DEBUG] Payload (info) sent to server
+19/04/23 15:35:32 [DEBUG] Payload get from server
+19/04/23 15:35:35 [DEBUG] Payload (info) sent to server
+19/04/23 15:35:35 [DEBUG] Payload get from server
+19/04/23 15:35:38 [DEBUG] Payload (info) sent to server
+19/04/23 15:35:38 [DEBUG] Payload get from server
+19/04/23 15:36:06 [DEBUG] Payload (show) sent to server
+19/04/23 15:36:06 [DEBUG] Payload get from server
+19/04/23 15:37:14 [DEBUG] Payload (help) sent to server
+19/04/23 15:37:14 [DEBUG] Payload get from server
+19/04/23 15:37:36 [DEBUG] Payload (load) sent to server
+19/04/23 15:37:36 [DEBUG] Payload get from server
+19/04/23 15:38:55 [DEBUG] Payload (add) sent to server
+19/04/23 15:38:55 [DEBUG] Payload get from server
+19/04/23 15:39:02 [DEBUG] Payload (show) sent to server
+19/04/23 15:39:02 [DEBUG] Payload get from server
+19/04/23 15:52:46 [DEBUG] Payload (load) sent to server
+19/04/23 15:52:46 [DEBUG] Payload get from server
+19/04/23 15:58:19 [DEBUG] Payload (load) sent to server
+19/04/23 15:58:19 [DEBUG] Payload get from server
+19/04/23 15:59:27 [DEBUG] Payload (load) sent to server
+19/04/23 15:59:28 [DEBUG] Payload get from server
+19/04/23 15:59:36 [DEBUG] Payload (show) sent to server
+19/04/23 15:59:38 [WARN] Server didnt response
+19/04/23 16:01:13 [DEBUG] Payload (load) sent to server
+19/04/23 16:01:13 [DEBUG] Payload get from server
+19/04/23 16:01:15 [DEBUG] Payload (show) sent to server
+19/04/23 16:01:16 [WARN] Server didnt response
+19/04/23 22:40:00 [DEBUG] Payload (info) sent to server
+19/04/23 22:40:00 [DEBUG] Payload get from server
+19/04/23 22:44:02 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3419
+19/04/23 22:49:25 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3712
+19/04/23 22:49:28 [DEBUG] Payload (info) sent to server
+19/04/23 22:49:29 [WARN] Server didnt response
+19/04/23 22:50:00 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3336
+19/04/23 22:50:03 [DEBUG] Payload (info) sent to server
+19/04/23 22:50:04 [WARN] Server didnt response
+19/04/23 22:51:51 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3418
+19/04/23 22:51:53 [DEBUG] Payload (info) sent to server
+19/04/23 22:51:55 [WARN] Server didnt response
+19/04/23 22:53:59 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3821
+19/04/23 22:54:01 [DEBUG] Payload (info) sent to server
+19/04/23 22:54:01 [DEBUG] Payload get from server
