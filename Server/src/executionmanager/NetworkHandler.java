@@ -8,14 +8,15 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class NetworkHandler {
     private static final Logger log = Logger.getLogger(NetworkHandler.class);
-    static DatagramSocket serverSocket;
-    static ServerInputHandler inputHandler;
-    static ServerOutputHandler outputHandler;
-    static int SERVER_PORT = 64999;
+    private static DatagramSocket serverSocket;
+
+    private static final int SERVER_PORT = 64999;
 
     public static void start() {
         try {
@@ -24,18 +25,22 @@ public class NetworkHandler {
         } catch (SocketException e) {
             log.error("Socket error");
         }
-        inputHandler = new ServerInputHandler(serverSocket);
-        outputHandler = new ServerOutputHandler(serverSocket);
-        for (; ; ) {
+        while (true) {
+            ServerInputHandler inputHandler = new ServerInputHandler(serverSocket);
+            ServerOutputHandler outputHandler = new ServerOutputHandler(serverSocket);
             try {
-                requestHandling();
-            } catch (IOException | ClassNotFoundException e) {
-                log.error("Error while handling request");
+                    try {
+                        requestHandling(inputHandler, outputHandler);
+                    } catch (IOException | ClassNotFoundException e) {
+                        log.error("Error while handling request");
+                    }
+            } catch (Exception e) {
+                log.error(e.getMessage());
             }
         }
     }
 
-    private static void requestHandling() throws IOException, ClassNotFoundException {
+    private static void requestHandling(ServerInputHandler inputHandler, ServerOutputHandler outputHandler) throws IOException, ClassNotFoundException {
         C2SPackage request = inputHandler.input();
         log.debug("Payload get (" + request.command() + ") from: " + inputHandler.getLastIP() + ":" + inputHandler.getLastPort());
         outputHandler.setPort(inputHandler.getLastPort());

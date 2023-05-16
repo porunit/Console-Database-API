@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class ExecuteScriptCommand extends Command {
     private final Logger log = Logger.getLogger(ExecuteScriptCommand.class);
 
-    public static String checkRecursion(String path, Set<String> used) {
+    public static String checkRecursion(String path, Set<String> used) throws FileNotFoundException {
         StringBuilder script = new StringBuilder();
         try (Scanner scanner = new Scanner(new File(path))) {
             while (scanner.hasNextLine()) {
@@ -37,7 +37,7 @@ public class ExecuteScriptCommand extends Command {
             }
             return null;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException();
+            throw new FileNotFoundException();
         }
     }
 
@@ -53,7 +53,7 @@ public class ExecuteScriptCommand extends Command {
         String test = null;
         try {
             test = checkRecursion(argument, new HashSet<>());
-        } catch (RuntimeException e) {
+        } catch (FileNotFoundException e) {
             log.error(e.getMessage());
         }
         if (test != null) {

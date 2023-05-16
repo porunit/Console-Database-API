@@ -1,5 +1,6 @@
 package executionmanager;
 
+import exceptions.AnswerTimeoutException;
 import io.ConsoleInputHandler;
 import io.network.ClientInputHandler;
 import io.network.ClientOutputHandler;
@@ -15,8 +16,6 @@ import java.util.Objects;
 public class NetworkHandler {
     static final int PORT_RANGE = 1000;
     static final int DEFAULT_CLIENT_PORT = 3000 + (int) (PORT_RANGE * Math.random());
-    static final int TIMEOUT = 1500;
-    static final int NO_READY_CHANNELS = 0;
     private static final Logger log = Logger.getLogger(NetworkHandler.class);
 
     public static void start() {
@@ -48,26 +47,26 @@ public class NetworkHandler {
                     CommandProcessor.parse(command, outputHandler, inputHandler);
                     log.debug("Payload (" + command + ") sent to server");
                     break;
-                } catch (IllegalArgumentException | IOException e) {
+                } catch (IllegalArgumentException | IOException | AnswerTimeoutException e) {
                     System.out.println(e.getMessage());
                 }
             }
-
                 responseHandling(inputHandler);
         }
     }
 
     private static void responseHandling(ClientInputHandler inputHandler) {
-
         try {
             S2CPackage payload = inputHandler.input();
             System.out.println(payload.response());
             log.debug("Payload get from server");
         } catch (IOException | ClassNotFoundException e) {
             log.error(e.getMessage());
+        }catch (AnswerTimeoutException e){
+            log.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }
 }
-
 

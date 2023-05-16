@@ -7,6 +7,7 @@ import commandmanagement.CommandMapsBuilder;
 import commandmanagement.IdValidator;
 import commandmanagement.commands.RemoveByIdCommand;
 import commandmanagement.commands.UpdateCommand;
+import exceptions.AnswerTimeoutException;
 import io.InputHandler;
 import io.OutputHandler;
 import io.network.ClientInputHandler;
@@ -41,7 +42,7 @@ public class CommandProcessor {
      *
      * @param commandName a string representing the command input to parse
      */
-    public static void parse(String commandName, OutputHandler outputHandler, ClientInputHandler inputHandler) throws IOException {
+    public static void parse(String commandName, OutputHandler outputHandler, ClientInputHandler inputHandler) throws IOException, AnswerTimeoutException {
         if (commandName == null) return;
         String[] array = commandName.split("\\s+");
         var node = array[0];
