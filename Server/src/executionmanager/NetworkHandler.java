@@ -8,14 +8,11 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 public class NetworkHandler {
     private static final Logger log = Logger.getLogger(NetworkHandler.class);
     private static DatagramSocket serverSocket;
-
     private static final int SERVER_PORT = 64999;
 
     public static void start() {
@@ -29,11 +26,11 @@ public class NetworkHandler {
             ServerInputHandler inputHandler = new ServerInputHandler(serverSocket);
             ServerOutputHandler outputHandler = new ServerOutputHandler(serverSocket);
             try {
-                    try {
-                        requestHandling(inputHandler, outputHandler);
-                    } catch (IOException | ClassNotFoundException e) {
-                        log.error("Error while handling request");
-                    }
+                try {
+                    requestHandling(inputHandler, outputHandler);
+                } catch (IOException | ClassNotFoundException e) {
+                    log.error("Error while handling request");
+                }
             } catch (Exception e) {
                 log.error(e.getMessage());
             }
