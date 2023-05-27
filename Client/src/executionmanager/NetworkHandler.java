@@ -36,9 +36,12 @@ public class NetworkHandler {
         log.info("Chanel opened on port: " + clientAddress);
 
 
+        assert channel != null;
         ClientInputHandler inputHandler = new ClientInputHandler(channel);
         ClientOutputHandler outputHandler = new ClientOutputHandler(channel);
         ConsoleInputHandler consoleInputHandler = new ConsoleInputHandler();
+        AuthenticationHandler authHandler = new AuthenticationHandler(outputHandler, inputHandler);
+        authHandler.auth();
         while (true) {
             while (true) {
                 try {

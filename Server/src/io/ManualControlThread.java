@@ -3,6 +3,7 @@ package io;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import commandmanagement.commands.ExitCommand;
+import commandmanagement.commands.LoadCommand;
 import commandmanagement.commands.SaveCommand;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class ManualControlThread implements Runnable {
         if (!manualCommands.containsKey(commandName)) {
             throw new IllegalArgumentException("Command doesn't exists");
         }
-        manualCommands.get(node).execute(new CommandData(null, new ConsoleOutputHandler(), null));
+        manualCommands.get(node).execute(new CommandData(null, new ConsoleOutputHandler(), null, null ,null));
     }
 }
 

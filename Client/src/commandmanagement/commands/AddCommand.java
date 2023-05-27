@@ -3,6 +3,7 @@ package commandmanagement.commands;
 import commandmanagement.Command;
 import commandmanagement.CommandData;
 import data.*;
+import executionmanager.AuthenticationHandler;
 import io.AddInputHelper;
 import io.network.C2SPackage;
 
@@ -45,7 +46,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(CommandData commandData) {
-        C2SPackage sPackage = new C2SPackage("add", null, add());
+        C2SPackage sPackage = new C2SPackage("add", null, AuthenticationHandler.username,AuthenticationHandler.password,add());
         try {
             commandData.outputHandler().printObj(sPackage);
         } catch (IOException e) {

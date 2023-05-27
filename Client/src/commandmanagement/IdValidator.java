@@ -1,6 +1,7 @@
 package commandmanagement;
 
 import exceptions.AnswerTimeoutException;
+import executionmanager.AuthenticationHandler;
 import io.OutputHandler;
 import io.network.C2SPackage;
 import io.network.ClientInputHandler;
@@ -21,7 +22,7 @@ public class IdValidator {
 
     public boolean validateId(String id) throws AnswerTimeoutException {
         try {
-            outputHandler.printObj(new C2SPackage("validate", id, null));
+            outputHandler.printObj(new C2SPackage("validate", id, AuthenticationHandler.username,AuthenticationHandler.password,null));
             S2CPackage payload = inputHandler.input();
             if (payload.response().equals("approve")) {
                 return true;
