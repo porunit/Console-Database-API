@@ -9,7 +9,7 @@ public class SignInCommand extends Command {
     Logger log = Logger.getLogger(SignInCommand.class);
     @Override
     public String getDescription() {
-        return null;
+        return "signup: зарегистрировать новый аккаунт";
     }
 
     @Override

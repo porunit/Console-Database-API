@@ -9,7 +9,7 @@ public class LoginCommand extends Command {
     Logger log = Logger.getLogger(LoginCommand.class);
     @Override
     public String getDescription() {
-        return null;
+        return "login: войти в аккаунт";
     }
 
     @Override

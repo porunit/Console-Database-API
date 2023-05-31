@@ -2,6 +2,7 @@ package executionmanager;
 
 import data.StudyGroup;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -35,7 +36,7 @@ public class DatabaseHandler {
     public boolean registerUser(String username, String password) {
         try (PreparedStatement statement = connection.prepareStatement(ADD_USER_REQUEST)) {
             statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(2, DigestUtils.sha256Hex(password));
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 log.debug("User registered successfully: " + username);
@@ -67,6 +68,7 @@ public class DatabaseHandler {
     public boolean loginUser(String name, String password) {
         try (PreparedStatement statement = connection.prepareStatement(CHECK_LOGIN)) {
             statement.setString(1, name);
+            password = DigestUtils.sha256Hex(password);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

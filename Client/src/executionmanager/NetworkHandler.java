@@ -40,8 +40,9 @@ public class NetworkHandler {
         ClientInputHandler inputHandler = new ClientInputHandler(channel);
         ClientOutputHandler outputHandler = new ClientOutputHandler(channel);
         ConsoleInputHandler consoleInputHandler = new ConsoleInputHandler();
-        AuthenticationHandler authHandler = new AuthenticationHandler(outputHandler, inputHandler);
-        authHandler.auth();
+        AuthenticationHandler.setClientInputHandler(inputHandler);
+        AuthenticationHandler.setClientOutputHandler(outputHandler);
+        AuthenticationHandler.auth();
         while (true) {
             while (true) {
                 try {

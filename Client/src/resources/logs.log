@@ -274,3 +274,20 @@
 27/05/23 21:36:58 [DEBUG] Payload get from server
 27/05/23 21:36:59 [DEBUG] Payload (show) sent to server
 27/05/23 21:36:59 [DEBUG] Payload get from server
+31/05/23 09:18:45 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3762
+31/05/23 09:19:15 [DEBUG] Payload (show) sent to server
+31/05/23 09:19:15 [DEBUG] Payload get from server
+31/05/23 09:27:14 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3526
+31/05/23 09:27:33 [DEBUG] Payload (help) sent to server
+31/05/23 09:27:33 [DEBUG] Payload get from server
+31/05/23 09:28:54 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3968
+31/05/23 09:29:00 [DEBUG] Payload (help) sent to server
+31/05/23 09:29:00 [DEBUG] Payload get from server
+31/05/23 09:30:21 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3042
+31/05/23 09:30:30 [DEBUG] Payload (help) sent to server
+31/05/23 09:30:30 [DEBUG] Payload get from server
+31/05/23 09:30:38 [DEBUG] Payload (help) sent to server
+31/05/23 09:30:38 [DEBUG] Payload get from server
+31/05/23 11:00:09 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3347
+31/05/23 11:01:45 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3970
+31/05/23 11:18:03 [INFO] Chanel opened on port: 0.0.0.0/0.0.0.0:3071

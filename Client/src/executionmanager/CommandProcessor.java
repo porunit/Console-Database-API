@@ -42,7 +42,7 @@ public class CommandProcessor {
             throw new IllegalArgumentException("Command doesn't exists");
         } else if (array.length == COMMAND_NO_ARG_LENGTH) {
             Command command = commandsHashMap.get(node);
-            command.proxy(new CommandData(null, outputHandler));
+            command.proxy(new CommandData(null, outputHandler, inputHandler));
         } else {
             String argument = array[1];
             if(commandsWithID.containsKey(node)){
@@ -52,7 +52,7 @@ public class CommandProcessor {
                 }
             }
             Command command = commandsHashMap.get(node);
-            command.proxy(new CommandData(argument, outputHandler));
+            command.proxy(new CommandData(argument, outputHandler, inputHandler));
         }
     }
 
