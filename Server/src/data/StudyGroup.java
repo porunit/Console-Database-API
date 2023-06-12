@@ -16,6 +16,7 @@ public class StudyGroup implements Serializable {
     private FormOfEducation formOfEducation;
     private Semester semesterEnum;
     private Person groupAdmin;
+    private String username;
 
     public StudyGroup() {
     }
@@ -39,6 +40,21 @@ public class StudyGroup implements Serializable {
             throw new WrongDataTypeException();
         else this.semesterEnum = semesterEnum;
         this.groupAdmin = groupAdmin;
+    }
+
+    public StudyGroup(int id, String name, float coordX, int coordY,
+                      String creationDate, int studentsCount, String formOfEducation,
+                      String semester, String adminName, int weight,
+                      String colour, int locX, int locY, int locZ, String username) {
+        this.id=id;
+        this.name=name;
+        this.coordinates = new Coordinates(coordX, (long) coordY);
+        this.creationDate =creationDate;
+        this.studentsCount = studentsCount;
+        this.formOfEducation = FormOfEducation.valueOf(formOfEducation);
+        this.semesterEnum = Semester.valueOf(semester);
+        this.groupAdmin = new Person(adminName, (long) weight, Color.valueOf(colour), new Location(locX,locY,locZ));
+        this.username = username;
     }
 
     public long getId() {
@@ -140,5 +156,12 @@ public class StudyGroup implements Serializable {
         this.groupAdmin = groupAdmin;
     }
 
+    public void setUsername(String name){
+        username =name;
+    }
+
+    public String getUsername(){
+        return username;
+    }
 }
 

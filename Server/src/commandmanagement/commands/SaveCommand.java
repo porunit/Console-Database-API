@@ -5,11 +5,13 @@ import commandmanagement.Command;
 import commandmanagement.CommandData;
 import data.StudyGroup;
 import executionmanager.CollectionManager;
+import executionmanager.DatabaseManager;
 import org.apache.log4j.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @NoArguments
 public class SaveCommand extends Command {
@@ -21,14 +23,11 @@ public class SaveCommand extends Command {
      */
     @Override
     public void execute(CommandData commandData) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(CollectionManager.getFilePath()))) {
-            writer.println("---");
-            CollectionManager.getAll().stream()
-                    .map(StudyGroup::toString)
-                    .forEach(writer::println);
-            log.info("Data saved to file");
-        } catch (IOException e) {
-            log.error(e.getMessage());
+        try {
+            DatabaseManager.save(CollectionManager.getAll());
+            commandData.outputHandler().print("Successful");
+        }catch (SQLException e){
+            commandData.outputHandler().print(e.getMessage());
         }
     }
 

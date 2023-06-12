@@ -6,6 +6,8 @@ import commandmanagement.CommandData;
 import executionmanager.CollectionManager;
 import org.apache.log4j.Logger;
 
+import java.util.Objects;
+
 public class UpdateCommand extends Command {
     private final Logger log = Logger.getLogger(UpdateCommand.class);
 
@@ -36,6 +38,12 @@ public class UpdateCommand extends Command {
         } else {
             var group = commandData.group();
             group.setId(id);
+            var studyGroup = CollectionManager.getById(id);
+            if(!Objects.equals(studyGroup.getUsername(), commandData.username())){
+                outputHandler.print("You dont have access");
+                return;
+            }
+            group.setUsername(commandData.username());
             CollectionManager.remove(id);
             CollectionManager.add(group);
             outputHandler.print("Element updated");

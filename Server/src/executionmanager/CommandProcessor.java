@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class CommandProcessor {
     final static int COMMAND_NO_ARG_LENGTH = 1;
     final static int COMMAND_MAX_ARG_LENGTH = 2;
+
     private static final HashMap<String, Command> commandsHashMap = CommandMapsBuilder.buildCommandMap();
 
     /**
@@ -45,11 +46,11 @@ public class CommandProcessor {
                 outputHandler.print("Command doesn't exists");
             } else if (array.length == COMMAND_NO_ARG_LENGTH) {
                 Command command = commandsHashMap.get(node);
-                command.proxy(new CommandData(null, outputHandler, null));
+                command.proxy(new CommandData(null, outputHandler, null, null, null));
             } else {
                 String argument = array[1];
                 Command command = commandsHashMap.get(node);
-                command.proxy(new CommandData(argument, outputHandler, null));
+                command.proxy(new CommandData(argument, outputHandler, null,null, null));
             }
         } catch (IllegalArgumentException | RecursionException e) {
             outputHandler.print(e.getMessage());
@@ -59,20 +60,18 @@ public class CommandProcessor {
     public static void parse(C2SPackage payload, OutputHandler outputHandler, ServerInputHandler inputHandler) {
         try {
             if (payload.command().equals("validate")) {
-                if (new IdValidator(inputHandler, (ServerOutputHandler) outputHandler).validateId(payload.arg())) {
+                if (new IdValidator((ServerOutputHandler) outputHandler).validateId(payload.arg())) {
                     payload = inputHandler.input();
                 } else {
                     return;
                 }
             }
             var command = commandsHashMap.get(payload.command());
-            CommandData data = new CommandData(payload.arg(), outputHandler, (StudyGroup) payload.group());
+            CommandData data = new CommandData(payload.arg(), outputHandler, (StudyGroup) payload.group(), payload.username(), payload.password());
             command.execute(data);
         } catch (IllegalArgumentException | RecursionException e) {
             outputHandler.print(e.getMessage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

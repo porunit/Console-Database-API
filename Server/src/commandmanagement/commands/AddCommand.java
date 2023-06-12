@@ -35,6 +35,7 @@ public class AddCommand extends Command {
         var group = commandData.group();
         var id = createID();
         group.setId(id);
+        group.setUsername(commandData.username());
         CollectionManager.joinId(id);
         CollectionManager.add(group);
         commandData.outputHandler().print("Element added");

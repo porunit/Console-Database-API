@@ -2,6 +2,7 @@ package commandmanagement.commands;
 
 import commandmanagement.Command;
 import commandmanagement.CommandData;
+import executionmanager.AuthenticationHandler;
 import io.network.C2SPackage;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class RemoveByIdCommand extends Command {
      */
     @Override
     public void execute(CommandData commandData) throws IOException {
-        commandData.outputHandler().printObj(new C2SPackage("remove", commandData.arg(), null));
+        commandData.outputHandler().printObj(new C2SPackage("remove", commandData.arg(), AuthenticationHandler.username,AuthenticationHandler.password,null));
     }
 
     @Override

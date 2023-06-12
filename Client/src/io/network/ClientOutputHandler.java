@@ -19,6 +19,7 @@ public class ClientOutputHandler implements OutputHandler {
         int SERVER_PORT = 64999;
         serverAddress = new InetSocketAddress("localhost", SERVER_PORT);
     }
+
     @Override
     public void printObj(C2SPackage command) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

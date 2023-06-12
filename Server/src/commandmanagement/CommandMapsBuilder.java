@@ -29,6 +29,8 @@ public class CommandMapsBuilder {
         commandHashMap.put("print_field_descending_form_of_education", new PrintFieldDescendingCommand());
         commandHashMap.put("save", new SaveCommand());
         commandHashMap.put("show", new ShowCommand());
+        commandHashMap.put("login", new LoginCommand());
+        commandHashMap.put("signup", new SignInCommand());
         return commandHashMap;
     }
 }
