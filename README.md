@@ -2,7 +2,7 @@
     <div class="flex flex-grow flex-col gap-3">
         <div class="min-h-[20px] flex flex-col items-start gap-3 overflow-x-auto whitespace-pre-wrap break-words">
             <div class="markdown prose w-full break-words dark:prose-invert light">
-                <h1>Study-Group-Manager</h1>
+                <h1>ITMO University Lab7</h1>
                 <p>Study-Group-Manager - это консольное приложение,
                     разработанное на чистом Java, предназначенное для управления
                     базой данных учебных групп. Приложение построено на
@@ -23,23 +23,6 @@
                         авторизации для обеспечения безопасности данных.</p>
                     </li>
                 </ul>
-                <h2>Установка</h2>
-                <p>Для запуска приложения вам потребуется Java Runtime
-                    Environment (JRE). Если у вас его нет, установите его
-                    первым.</p>
-                <ol>
-                    <li>Скачайте JAR-файлы из репозитория.</li>
-                    <li>Откройте консоль или терминал в директории, содержащей
-                        JAR-файл.
-                    </li>
-                    <li>Запустите приложение с помощью команды:</li>
-                </ol>
-                <pre><div class="bg-black rounded-md mb-4"><div
-                        class="p-4 overflow-y-auto"><code
-                        class="!whitespace-pre hljs language-bash">java -jar server.jar
-</code></div><code
-                        class="!whitespace-pre hljs language-bash">java -jar client.jar
-</code></div></div></pre>
                 <h2>Использование</h2>
                 <p>После запуска приложения следуйте инструкциям на экране для
                     выполнения различных операций, таких как добавление,
