@@ -2,7 +2,7 @@
     <div class="flex flex-grow flex-col gap-3">
         <div class="min-h-[20px] flex flex-col items-start gap-3 overflow-x-auto whitespace-pre-wrap break-words">
             <div class="markdown prose w-full break-words dark:prose-invert light">
-                <h1>сConsole Database API</h1>
+                <h1>Console Database API</h1>
                 <p>Study-Group-Manager - это консольное приложение,
                     разработанное на чистом Java, предназначенное для управления
                     базой данных учебных групп. Приложение построено на
